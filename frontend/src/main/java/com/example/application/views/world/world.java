@@ -8,6 +8,6 @@ import com.vaadin.flow.router.Route;
 public class world extends VerticalLayout {
 
     public world () {
-        add(new H1("Hello world fuck Waga's component"));
+        add(new H1("Hello world fuck Waga's hey component"));
     }
 }
