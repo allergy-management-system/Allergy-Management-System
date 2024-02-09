@@ -1,6 +1,6 @@
 package com.example.application.views.pages;
 
-import com.example.application.views.component.RegisterForm;
+import com.example.application.views.component.registerForm.RegisterForm;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
@@ -10,7 +10,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
 
 @Route("register")
-@CssImport("./themes/frontend/styles.css")
+@CssImport("./themes/frontend/Register.css")
 public class RegisterPage extends HorizontalLayout {
 
     RegisterForm registerForm = new RegisterForm();

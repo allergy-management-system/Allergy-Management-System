@@ -1,10 +1,10 @@
 import { injectGlobalCss } from 'Frontend/generated/jar-resources/theme-util.js';
 
 import { css, unsafeCSS, registerStyles } from '@vaadin/vaadin-themable-mixin';
-import $cssFromFile_0 from 'Frontend/themes/frontend/styles.css?inline';
+import $cssFromFile_0 from 'Frontend/themes/frontend/Login.css?inline';
 
 injectGlobalCss($cssFromFile_0.toString(), 'CSSImport end', document);
-import $cssFromFile_1 from 'Frontend/themes/frontend/Login.css?inline';
+import $cssFromFile_1 from 'Frontend/themes/frontend/Register.css?inline';
 
 injectGlobalCss($cssFromFile_1.toString(), 'CSSImport end', document);
 import '@vaadin/polymer-legacy-adapter/style-modules.js';
