@@ -4,6 +4,9 @@ import { css, unsafeCSS, registerStyles } from '@vaadin/vaadin-themable-mixin';
 import $cssFromFile_0 from 'Frontend/themes/frontend/styles.css?inline';
 
 injectGlobalCss($cssFromFile_0.toString(), 'CSSImport end', document);
+import $cssFromFile_1 from 'Frontend/themes/frontend/Login.css?inline';
+
+injectGlobalCss($cssFromFile_1.toString(), 'CSSImport end', document);
 import '@vaadin/polymer-legacy-adapter/style-modules.js';
 import '@vaadin/app-layout/theme/lumo/vaadin-app-layout.js';
 import '@vaadin/vertical-layout/theme/lumo/vaadin-vertical-layout.js';
