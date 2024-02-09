@@ -1,5 +1,6 @@
 package com.example.application.views.pages;
 
+import com.example.application.services.authentication.AuthServices;
 import com.example.application.views.component.registerForm.RegisterForm;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -13,9 +14,11 @@ import com.vaadin.flow.server.StreamResource;
 @CssImport("./themes/frontend/Register.css")
 public class RegisterPage extends HorizontalLayout {
 
-    RegisterForm registerForm = new RegisterForm();
+    private final AuthServices authServices;
 
     public RegisterPage () {
+        this.authServices = new AuthServices();
+        RegisterForm registerForm = new RegisterForm(authServices);
 
         HorizontalLayout mainLayout = new HorizontalLayout();
         mainLayout.addClassName("main-layout");
