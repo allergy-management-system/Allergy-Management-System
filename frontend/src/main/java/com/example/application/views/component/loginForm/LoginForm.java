@@ -39,7 +39,7 @@ public class LoginForm extends VerticalLayout {
             HorizontalLayout footerText = new HorizontalLayout();
             footerText.addClassName("footer-text");
             Span alreadyHaveAnAccount = new Span("Don't have an account?");
-            Anchor signIn = new Anchor("/register", "Sign in");
+            Anchor signIn = new Anchor("/register", "Sign up");
 
             footerText.add(alreadyHaveAnAccount, signIn);
             footerText.setAlignItems(FlexComponent.Alignment.CENTER);
