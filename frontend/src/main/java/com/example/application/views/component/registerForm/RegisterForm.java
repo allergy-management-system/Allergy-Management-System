@@ -1,6 +1,12 @@
 package com.example.application.views.component.registerForm;
 
+import com.example.application.services.User;
 import com.example.application.services.authentication.AuthServices;
+import com.example.application.views.component.loginForm.LoginForm;
+import com.example.application.views.pages.Dashboard;
+import com.example.application.views.pages.LoginPage;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -13,7 +19,10 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,9 +31,11 @@ public class RegisterForm extends VerticalLayout {
 
     private final AuthServices authServices;
 
+    User user = new User();
+
     TextField name = new TextField("Name");
     EmailField email = new EmailField("Email");
-    PasswordField passwordField = new PasswordField("Password");
+    PasswordField password = new PasswordField("Password");
     Button button = new Button("Sign up");
 
     VerticalLayout form = new VerticalLayout();
@@ -42,8 +53,8 @@ public class RegisterForm extends VerticalLayout {
         email.setPlaceholder("Type your email");
         email.addClassName("text-field");
 
-        passwordField.setPlaceholder("Type your password");
-        passwordField.addClassName("text-field");
+        password.setPlaceholder("Type your password");
+        password.addClassName("text-field");
 
         button.addClassName("register-button");
         button.addClickListener(event -> register());
@@ -57,29 +68,100 @@ public class RegisterForm extends VerticalLayout {
         footerText.add(alreadyHaveAnAccount, signIn);
         footerText.setAlignItems(Alignment.CENTER);
 
-        form.add(title, name, email, passwordField, button, footerText);
+        form.add(title, name, email, password, button, footerText);
 
         add(form);
     }
 
     private void register() {
-        // Construct input data for registration
-        Map<String, Object> inputData = new HashMap<>();
-        inputData.put("firstName", name.getValue());
-        inputData.put("lastName", "LastName");
-        inputData.put("email", email.getValue());
-        inputData.put("gender", "male");
-        inputData.put("password", passwordField.getValue());
-        inputData.put("dateOfBirth", "12/23/2006        ");
 
-        // Call the register method in the AuthService
-        authServices.register(inputData).ifPresent(responseBody -> {
-            System.out.println("InputData: " + inputData);
+        RegisterForm.ValidationResult validationResult = validateForm(name.getValue(), email.getValue(), password.getValue());
 
-            System.out.println("Registration successful!");
-            System.out.println(responseBody);
-            Notification.show("Registration successful!");
-            // Process the response if needed
-        });
+        if (validationResult.isValid()) {
+            submitForm(name.getValue(), email.getValue(), password.getValue());
+        } else {
+            String errorMessage = validationResult.getErrorMessage();
+            showErrorMessage(errorMessage);
+        }
+    }
+
+    private void submitForm(String name, String email, String password) {
+        user.setFirstName(String.valueOf(name));
+        user.setLastName("Larry");
+        user.setEmail(String.valueOf(email));
+        user.setGender("male");
+        user.setPassword(String.valueOf(password));
+        user.setDateOfBirth("12/23/2004");
+
+        Object authLogin = authServices.register(user.toJson());
+        // Check if the response is an instance of ResponseEntity (assuming it's used for handling HTTP responses)
+        if (authLogin instanceof ResponseEntity<?>) {
+            // Cast the response to ResponseEntity<String> to access status code
+            ResponseEntity<String> responseEntity = (ResponseEntity<String>) authLogin;
+            //<--Check the response status
+            if (responseEntity.getStatusCode() == HttpStatus.OK) {
+                Notification.show("Registration successful!");
+                // Navigate to the Login page
+                getUI().ifPresent(ui -> ui.navigate(LoginPage.class));
+            } else {
+                Notification.show("Registration failed. Please try again.");
+            }
+        }
+    }
+
+    private void showErrorMessage(String errorMessage) {
+        Notification.show(errorMessage);
+    }
+
+    public class ValidationResult {
+        private boolean isValid;
+        private String errorMessage;
+
+        public ValidationResult(boolean isValid, String errorMessage) {
+            this.isValid = isValid;
+            this.errorMessage = errorMessage;
+        }
+
+        public boolean isValid() {
+            return isValid;
+        }
+
+        public String getErrorMessage() {
+            return errorMessage;
+        }
+    }
+
+    public RegisterForm.ValidationResult validateForm(String name,String email, String password) {
+        // Trim input strings
+        email = email.trim();
+        password = password.trim();
+
+        // Check for null or empty strings
+        if (name.isEmpty() ||email.isEmpty() || password.isEmpty()) {
+            return new RegisterForm.ValidationResult(false, "Email and password are required.");
+        }
+
+        // Email validation
+        if (!isValidEmail(email)) {
+            return new RegisterForm.ValidationResult(false, "Invalid email format.");
+        }
+
+        // Password validation
+        if (password.length() < 8 || !containsSpecialCharacter(password)) {
+            return new RegisterForm.ValidationResult(false, "Password must be at least 8 characters long and contain special characters.");
+        }
+
+        // If all validations pass, return success
+        return new RegisterForm.ValidationResult(true, "Validation successful.");
+    }
+
+    private boolean isValidEmail(String email) {
+        // Implement email validation logic (e.g., using regex)
+        return email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+    }
+
+    private boolean containsSpecialCharacter(String password) {
+        // Implement password validation logic (e.g., checking for special characters)
+        return password.matches(".*[!@#$%^&*()\\-_=+\\\\|\\[{\\]};:'\\\",<.>/?].*");
     }
 }
