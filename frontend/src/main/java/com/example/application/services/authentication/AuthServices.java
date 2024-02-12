@@ -1,43 +1,52 @@
 package com.example.application.services.authentication;
 
+import com.vaadin.flow.component.notification.Notification;
+import org.springframework.web.client.RestTemplate;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Map;
 import java.util.Optional;
 
 public class AuthServices {
+    private RestTemplate restTemplate;
 
     private final HttpClient httpClient;
     private final String baseUrl;
+
 
     public AuthServices() {
         this.httpClient = HttpClient.newHttpClient();
         this.baseUrl = "https://allergy-u6fk.onrender.com/api/v1";
     }
 
-    public Optional<String> register(Map<String, Object> inputData) {
+    public Object register(String inputData) {
         return sendPostRequest("/addNewUser", inputData);
     }
 
-    public Optional<String> login(Map<String, Object> inputData) {
+    public Object login(String inputData) {
         return sendPostRequest("/loginUser", inputData);
     }
 
-    private Optional<String> sendPostRequest(String endpoint, Map<String, Object> inputData) {
+    private Object sendPostRequest(String endpoint, String inputData) {
+        //<--set the Authentication token
+        String authToken = "8IvE5eAQaaRJXSZKgw4CDUBbEy8G9GpfajrbuS4pJ79gS7yo4kx6of1nbOpwvTMU";
+
         try {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(baseUrl + endpoint))
                     .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(inputData.toString()))
+                    .header("Authentication", "Barrier" + authToken)
+                    .POST(HttpRequest.BodyPublishers.ofString(inputData))
                     .build();
 
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            return Optional.of(response.body());
+            return response.body();
         } catch (Exception e) {
-            e.printStackTrace();
+            Notification.show("There's a network connection problem. Please, check your internet and try again.");
             return Optional.empty();
         }
+
     }
 }
