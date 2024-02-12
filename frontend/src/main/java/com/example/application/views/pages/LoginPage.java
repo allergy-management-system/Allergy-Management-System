@@ -1,6 +1,7 @@
 package com.example.application.views.pages;
 
 
+import com.example.application.services.authentication.AuthServices;
 import com.example.application.services.dashboard.UsersServices;
 import com.example.application.views.component.loginForm.LoginForm;
 import com.vaadin.flow.component.Component;
@@ -19,10 +20,12 @@ import java.util.Collection;
 public class LoginPage extends HorizontalLayout  {
 
     private final UsersServices usersServices;
+    private final AuthServices authServices;
 
-  LoginForm loginform = new LoginForm();
     public LoginPage () {
         this.usersServices = new UsersServices();
+        this.authServices = new AuthServices();
+        LoginForm loginform = new LoginForm(authServices);
 
         HorizontalLayout mainLayout = new HorizontalLayout();
         mainLayout.addClassName("main-layout");
@@ -38,9 +41,6 @@ public class LoginPage extends HorizontalLayout  {
         mainLayout.add(leftCol, rightCol);
 
         add(mainLayout);
-
-        add(new Button("Get all users", event -> GetUser()));
-
     }
 
     public Component LoginImage () {
@@ -51,12 +51,5 @@ public class LoginPage extends HorizontalLayout  {
         image.addClassName("register-image");
 
         return image;
-    }
-    
-    private void GetUser() {
-        usersServices.getAllUsers().ifPresent(responseBody -> {
-            System.out.println("This is all users");
-            System.out.println(responseBody);
-        });
     }
 }
