@@ -1,7 +1,6 @@
 package com.example.application.views.component.loginForm;
 
 import com.example.application.services.authentication.AuthServices;
-import com.example.application.views.pages.Dashboard;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -81,6 +80,9 @@ public class LoginForm extends VerticalLayout {
 
     private void submitForm(String formData) {
         Object authLogin = authServices.login(formData);
+        Notification.show("Login successful!");
+        // Navigate to the Dashboard page
+//        getUI().ifPresent(ui -> ui.navigate(Dashboard.class));
         // Check if the response is an instance of ResponseEntity (assuming it's used for handling HTTP responses)
         if (authLogin instanceof ResponseEntity<?>) {
             // Cast the response to ResponseEntity<String> to access status code
@@ -89,7 +91,7 @@ public class LoginForm extends VerticalLayout {
             if (responseEntity.getStatusCode() == HttpStatus.OK) {
                 Notification.show("Login successful!");
                 // Navigate to the Dashboard page
-                getUI().ifPresent(ui -> ui.navigate(Dashboard.class));
+//                getUI().ifPresent(ui -> ui.navigate(Dashboard.class));
             } else {
                 Notification.show("Login failed. Please try again.");
             }

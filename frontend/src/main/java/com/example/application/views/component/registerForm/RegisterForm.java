@@ -2,11 +2,7 @@ package com.example.application.views.component.registerForm;
 
 import com.example.application.services.User;
 import com.example.application.services.authentication.AuthServices;
-import com.example.application.views.component.loginForm.LoginForm;
-import com.example.application.views.pages.Dashboard;
 import com.example.application.views.pages.LoginPage;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -94,6 +90,9 @@ public class RegisterForm extends VerticalLayout {
         user.setDateOfBirth("12/23/2004");
 
         Object authLogin = authServices.register(user.toJson());
+        Notification.show("Registration successful!");
+        // Navigate to the Login page
+        getUI().ifPresent(ui -> ui.navigate(LoginPage.class));
         // Check if the response is an instance of ResponseEntity (assuming it's used for handling HTTP responses)
         if (authLogin instanceof ResponseEntity<?>) {
             // Cast the response to ResponseEntity<String> to access status code
