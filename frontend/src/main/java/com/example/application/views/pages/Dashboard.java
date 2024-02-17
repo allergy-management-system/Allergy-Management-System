@@ -1,6 +1,7 @@
 package com.example.application.views.pages;
 
 
+import com.example.application.views.component.settingsForm.settingsForm;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -19,6 +20,7 @@ import com.vaadin.flow.theme.lumo.LumoUtility;
 @CssImport("./themes/frontend/layout.css")
 public class Dashboard extends AppLayout {
 
+
     public Dashboard() {
         DrawerToggle toggle = new DrawerToggle();
 
@@ -34,8 +36,7 @@ public class Dashboard extends AppLayout {
         addToDrawer(scroller);
         addToNavbar(toggle, title);
 
-        // Add login component
-        addLoginComponent();
+
     }
 
     private SideNav getSideNav() {
@@ -44,24 +45,14 @@ public class Dashboard extends AppLayout {
                         VaadinIcon.DASHBOARD.create()),
                 new SideNavItem("Calender", "/calender",
                         VaadinIcon.CALENDAR.create()),
-                new SideNavItem("Messages", "/customers",
+                new SideNavItem("Messages", "/message",
                         VaadinIcon.ENVELOPE.create()),
-                new SideNavItem("Settings", "/products",
+                new SideNavItem("Settings", "/settings",
                         VaadinIcon.COG.create()),
                 new SideNavItem("Logout", "/documents",
                         VaadinIcon.SIGN_OUT.create()));
         return nav;
     }
 
-    private void addLoginComponent() {
-        Div loginDiv = new Div();
-        loginDiv.setId("login-div");
-        loginDiv.setText("Your login component goes here");
-        loginDiv.setSizeFull();
 
-
-        loginDiv.add("txt");
-
-        setContent(loginDiv);
-    }
 }

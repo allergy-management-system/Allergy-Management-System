@@ -8,3 +8,6 @@ vaadin-side-nav-item[current]::part(content){
 vaadin-side-nav-item[current]::part(content):hover{
     color: #FFFFFF;
 }
+vaadin-app-layout::part(navbar){
+    background-color: #FEF8E9;
+}
