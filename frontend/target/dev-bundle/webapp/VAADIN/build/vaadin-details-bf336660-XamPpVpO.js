@@ -1,0 +1,1 @@
+import{c9 as e}from"./indexhtml-NH_JTVgi.js";const t={tagName:"vaadin-details",displayName:"Details",elements:[{selector:"vaadin-details",displayName:"Root element",properties:e}]};export{t as default};

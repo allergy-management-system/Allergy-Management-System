@@ -1,0 +1,10 @@
+vaadin-app-layout::part(drawer){
+    width: 12rem;
+}
+vaadin-side-nav-item[current]::part(content){
+    background-color: #FEF8E9;
+    color: #F5CD58;
+}
+vaadin-side-nav-item[current]::part(content):hover{
+    color: #FFFFFF;
+}
