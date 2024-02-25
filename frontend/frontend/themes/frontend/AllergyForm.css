@@ -1,0 +1,32 @@
+.title-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.form-page {
+    width: 800px;
+    padding: 5%;
+}
+
+.risks-flex-row {
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    text-align: left;
+    float: left;
+    margin-bottom: 1rem;
+}
+
+.custom-button {
+    background: #F5CD58;
+    width: 195px;
+    color: black;
+    font-size: 14px;
+    margin-bottom: 5rem;
+}
+
+.vertical-group {
+    margin-bottom: 2rem;
+}
