@@ -1,0 +1,51 @@
+.container {
+    width: 100%;
+    margin-top: -35%;
+    position: relative;
+}
+
+.dashboard-image {
+    width: 98%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.record-button {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #F5CD58;
+    width: 400px;
+    color: black;
+}
+
+.flex-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.educational-content {
+    border: 2px solid #F5CD58;
+    border-radius: 16px;
+    padding: 1rem;
+    width: 45%;
+    margin-left: 1.5rem;
+}
+
+.card-title {
+    text-align: center;
+}
+
+.content {
+    margin: 2rem 0;
+}
+
+.common-food-allergy {
+    width: 45%;
+    background: #FDF5DF;
+    border-radius: 16px;
+    margin-right: 1.5rem;
+}
