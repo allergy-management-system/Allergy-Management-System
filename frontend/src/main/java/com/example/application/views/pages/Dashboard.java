@@ -16,7 +16,6 @@ import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
-@Route("dashboard")
 @CssImport("./themes/frontend/layout.css")
 public class Dashboard extends AppLayout {
 
@@ -49,7 +48,7 @@ public class Dashboard extends AppLayout {
                         VaadinIcon.ENVELOPE.create()),
                 new SideNavItem("Settings", "/settings",
                         VaadinIcon.COG.create()),
-                new SideNavItem("Logout", "/documents",
+                new SideNavItem("Logout", "/login",
                         VaadinIcon.SIGN_OUT.create()));
         return nav;
     }
