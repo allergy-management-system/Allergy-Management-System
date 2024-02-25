@@ -32,6 +32,7 @@ public class Form2 extends Div {
         RadioButtonGroup<String> radioGroup = new RadioButtonGroup<>();
         radioGroup.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
         radioGroup.setItems("Never", "Once", "More than once");
+        radioGroup.setValue("Never");
         Div verticalGroup2 = new Div();
         verticalGroup2.addClassName("vertical-group");
         verticalGroup2.add(label2, radioGroup);
