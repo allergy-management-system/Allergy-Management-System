@@ -1,5 +1,6 @@
 package com.example.application.views.component.allergyForm;
 
+import com.example.application.views.component.formStepper.FormFields;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
@@ -8,10 +9,10 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
+import com.vaadin.flow.dom.Style;
 
 @CssImport("./themes/frontend/AllergyForm.css")
 public class Form1 extends Div {
-
 
     Reaction[] reactions = {
             new Reaction("Peanuts"),
@@ -34,27 +35,28 @@ public class Form1 extends Div {
 
         Paragraph formTitle = new Paragraph("Check the foods that have caused an allergic reaction:");
 
-        Div riskLabel = new Div();
-        riskLabel.addClassName("risks-flex-row");
-
-        Div riskLevelGroup = new Div();
-        riskLevelGroup.addClassName("risks-flex-row");
+        HorizontalLayout risksColoum = new HorizontalLayout();
+        risksColoum.getStyle().setDisplay(Style.Display.FLEX);
+        risksColoum.getStyle().setFlexDirection(Style.FlexDirection.COLUMN);
+        risksColoum.getStyle().setJustifyContent(Style.JustifyContent.SPACE_BETWEEN);
 
         for (Reaction reaction: reactions) {
             Span label = new Span(reaction.getLabel());
             RadioButtonGroup<String> riskLevel = new RadioButtonGroup<>();
             riskLevel.setItems("Low", "High");
             riskLevel.setValue("Low");
+            riskLevel.getStyle().setMarginLeft("5rem");
+            riskLevel.getStyle().set("column-gap", "2rem");
 
-            riskLabel.add(label);
-            riskLevelGroup.add(riskLevel);
+            HorizontalLayout risksRow = new HorizontalLayout(label, riskLevel);
+            risksRow.getStyle().setDisplay(Style.Display.FLEX);
+            risksRow.getStyle().setFlexDirection(Style.FlexDirection.ROW);
+            risksRow.getStyle().setJustifyContent(Style.JustifyContent.SPACE_BETWEEN);
+            risksColoum.add(risksRow);
         }
 
-        HorizontalLayout risks = new HorizontalLayout();
-        risks.add(riskLabel, riskLevelGroup);
-
         VerticalLayout form = new VerticalLayout();
-        form.add(formTitle, risks);
+        form.add(formTitle, risksColoum);
 
         add(titleGroup, form);
         addClassName("form-page");
