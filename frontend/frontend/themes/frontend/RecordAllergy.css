@@ -20,6 +20,7 @@
     background: #F5CD58;
     width: 400px;
     color: black;
+    cursor: pointer;
 }
 
 .flex-row {
