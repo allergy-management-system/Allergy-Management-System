@@ -10,8 +10,10 @@ import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
 
+@Route("allergy-dashboard")
 @CssImport("./themes/frontend/RecordAllergy.css")
 public class RecordAllergy extends VerticalLayout {
     Item[] items = {
