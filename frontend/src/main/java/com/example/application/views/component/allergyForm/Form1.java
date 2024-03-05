@@ -1,6 +1,8 @@
 package com.example.application.views.component.allergyForm;
 
 import com.example.application.views.component.formStepper.FormFields;
+import com.example.application.views.component.formStepper.FormStepperView;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
@@ -13,6 +15,10 @@ import com.vaadin.flow.dom.Style;
 
 @CssImport("./themes/frontend/AllergyForm.css")
 public class Form1 extends Div {
+
+    FormFields formFields = new FormFields();
+
+    private RadioButtonGroup<String> riskLevel;
 
     Reaction[] reactions = {
             new Reaction("Peanuts"),
@@ -42,11 +48,17 @@ public class Form1 extends Div {
 
         for (Reaction reaction: reactions) {
             Span label = new Span(reaction.getLabel());
-            RadioButtonGroup<String> riskLevel = new RadioButtonGroup<>();
+            riskLevel = new RadioButtonGroup<>();
             riskLevel.setItems("Low", "High");
             riskLevel.setValue("Low");
+
+            riskLevel.addValueChangeListener(event -> {
+                String selectedValue = event.getValue();
+                formFields.setReactionRiskLevel(reaction.getLabel(), selectedValue);
+                System.out.println(reaction.getLabel() + ": " + selectedValue);
+            });
+
             riskLevel.getStyle().setMarginLeft("5rem");
-            riskLevel.getStyle().set("column-gap", "2rem");
 
             HorizontalLayout risksRow = new HorizontalLayout(label, riskLevel);
             risksRow.getStyle().setDisplay(Style.Display.FLEX);
@@ -58,7 +70,12 @@ public class Form1 extends Div {
         VerticalLayout form = new VerticalLayout();
         form.add(formTitle, risksColoum);
 
-        add(titleGroup, form);
+        Button button = new Button("Try me");
+        button.addClickListener(event -> {
+                System.out.println(formFields);
+        });
+
+        add(titleGroup, form, button);
         addClassName("form-page");
     }
 
@@ -73,4 +90,5 @@ public class Form1 extends Div {
             return label;
         }
     }
+
 }
