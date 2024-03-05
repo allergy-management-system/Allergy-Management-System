@@ -1,0 +1,1 @@
+import{$ as a,H as t}from"./indexhtml-n9rK-9iC.js";const e={tagName:"vaadin-notification",displayName:"Notification",elements:[{selector:"vaadin-notification-card::part(overlay)",displayName:"Notification card",properties:a},{selector:"vaadin-notification-card::part(content)",displayName:"Content",properties:t}]};export{e as default};

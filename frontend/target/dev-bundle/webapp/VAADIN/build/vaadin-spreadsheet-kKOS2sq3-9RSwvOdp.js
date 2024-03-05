@@ -1,0 +1,1 @@
+import{K as e}from"./indexhtml-n9rK-9iC.js";const r={tagName:"vaadin-spreadsheet",displayName:"Spreadsheet",elements:[{selector:"vaadin-spreadsheet",displayName:"Spreadsheet",properties:[e.backgroundColor,e.borderColor,e.borderWidth,e.borderRadius,e.padding]}]};export{r as default};

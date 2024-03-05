@@ -271,7 +271,7 @@
   "Frontend/themes/frontend/settings.css"
  ],
  "frontendHashes": {
-  "themes/frontend/AllergyForm.css": "1f513a725e5470b17ccdb554faf2b00a92017541445fef67d654c714c0b3741b",
+  "themes/frontend/AllergyForm.css": "4c17638917872a9a0d304ab74a6c8ca5e05a5ee1e8c8f730ece330cd85a487fe",
   "themes/frontend/Login.css": "daf4b76261309fc06b1b1003bb39807851dd1a5cf572f7fab6c8e8ccc4097296",
   "themes/frontend/RecordAllergy.css": "01c8133dc292d56ad5084b57f337094caf124a14bfcc5cc7bd6679127976e093",
   "themes/frontend/Register.css": "27b257a8c5fcfbb5a310b26e4fda59c44d992c4922fa047678a005d8344ca1d4",
@@ -303,7 +303,7 @@
   "frontend": "{\n  \"lumoImports\" : [ \"typography\", \"color\", \"spacing\", \"badge\", \"utility\" ]\n}"
  },
  "entryScripts": [
-  "VAADIN/build/indexhtml-wbxNgqLu.js"
+  "VAADIN/build/indexhtml-n9rK-9iC.js"
  ],
  "webComponents": [],
  "cvdlModules": {
@@ -338,6 +338,6 @@
  },
  "packageJsonHash": "aa07176bb324d6a387237e3369d9e5dc6ff75048fd481c0f481acac472ac9abb",
  "indexHtmlGenerated": [
-  "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-wbxNgqLu.js\"></script>"
+  "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-n9rK-9iC.js\"></script>"
  ]
 }
