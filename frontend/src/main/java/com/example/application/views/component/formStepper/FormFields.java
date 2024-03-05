@@ -13,8 +13,7 @@ public class FormFields {
     private String mushroom = "Low";
     private String gluten = "Low";
     private String mustard = "Low";
-    private String otherReaction = "Low";
-    private String otherFoods;
+    private String otherReaction;
     private String timesOfReaction;
     private String lastReaction;
     private String causeOfReaction;
@@ -25,7 +24,7 @@ public class FormFields {
 
     }
 
-    public FormFields(String peanuts, String fish, String eggs, String butter, String soyProducts, String milk, String otherNuts, String sugar, String mushroom, String gluten, String mustard, String otherReaction, String otherFoods, String timesOfReaction, String lastReaction, String causeOfReaction, String symptomsExperienced, String medicationAllergy, String additionalNotes, String riskLevel) {
+    public FormFields(String peanuts, String fish, String eggs, String butter, String soyProducts, String milk, String otherNuts, String sugar, String mushroom, String gluten, String mustard, String otherReaction, String timesOfReaction, String lastReaction, String causeOfReaction, String symptomsExperienced, String medicationAllergy, String additionalNotes, String riskLevel) {
         this.peanuts = peanuts;
         this.fish = fish;
         this.eggs = eggs;
@@ -38,7 +37,6 @@ public class FormFields {
         this.gluten = gluten;
         this.mustard = mustard;
         this.otherReaction = otherReaction;
-        this.otherFoods = otherFoods;
         this.timesOfReaction = timesOfReaction;
         this.lastReaction = lastReaction;
         this.causeOfReaction = causeOfReaction;
@@ -93,10 +91,6 @@ public class FormFields {
 
     public String getOtherReaction() {
         return otherReaction;
-    }
-
-    public String getOtherFoods() {
-        return otherFoods;
     }
 
     public String getTimesOfReaction() {
@@ -169,10 +163,6 @@ public class FormFields {
 
     public void setOtherReaction(String otherReaction) {
         this.otherReaction = otherReaction;
-    }
-
-    public void setOtherFoods(String otherFoods) {
-        this.otherFoods = otherFoods;
     }
 
     public void setTimesOfReaction(String timesOfReaction) {
@@ -252,7 +242,6 @@ public class FormFields {
         mushroom = "Low";
         gluten = "Low";
         mustard = "Low";
-        otherReaction = "Low";
     }
 
     @Override
@@ -270,14 +259,12 @@ public class FormFields {
                 ", gluten='" + gluten + '\'' +
                 ", mustard='" + mustard + '\'' +
                 ", otherReaction='" + otherReaction + '\'' +
-                ", otherFoods='" + otherFoods + '\'' +
                 ", timesOfReaction='" + timesOfReaction + '\'' +
                 ", lastReaction='" + lastReaction + '\'' +
                 ", causeOfReaction='" + causeOfReaction + '\'' +
                 ", symptomsExperienced='" + symptomsExperienced + '\'' +
                 ", medicationAllergy='" + medicationAllergy + '\'' +
                 ", additionalNotes='" + additionalNotes + '\'' +
-                ", riskLevel='" + fish + '\'' +
                 '}';
     }
 }

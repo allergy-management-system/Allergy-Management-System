@@ -16,8 +16,7 @@ import com.vaadin.flow.dom.Style;
 @CssImport("./themes/frontend/AllergyForm.css")
 public class Form1 extends Div {
 
-    FormFields formFields = new FormFields();
-
+    private FormFields formFields;
     private RadioButtonGroup<String> riskLevel;
 
     Reaction[] reactions = {
@@ -32,7 +31,9 @@ public class Form1 extends Div {
             new Reaction("Mustard"),
             new Reaction("Other"),
     };
-    public Form1 () {
+    public Form1 (FormFields formFields) {
+        this.formFields = formFields;
+
         H3 title = new H3("Food Allergy Form");
         Paragraph subTitle = new Paragraph("History and Current Status");
         VerticalLayout titleGroup = new VerticalLayout();
@@ -55,7 +56,6 @@ public class Form1 extends Div {
             riskLevel.addValueChangeListener(event -> {
                 String selectedValue = event.getValue();
                 formFields.setReactionRiskLevel(reaction.getLabel(), selectedValue);
-                System.out.println(reaction.getLabel() + ": " + selectedValue);
             });
 
             riskLevel.getStyle().setMarginLeft("5rem");
@@ -70,12 +70,7 @@ public class Form1 extends Div {
         VerticalLayout form = new VerticalLayout();
         form.add(formTitle, risksColoum);
 
-        Button button = new Button("Try me");
-        button.addClickListener(event -> {
-                System.out.println(formFields);
-        });
-
-        add(titleGroup, form, button);
+        add(titleGroup, form);
         addClassName("form-page");
     }
 

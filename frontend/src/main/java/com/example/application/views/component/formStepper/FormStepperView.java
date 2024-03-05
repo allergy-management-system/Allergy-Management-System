@@ -24,6 +24,8 @@ import java.util.function.Supplier;
 
 @CssImport("./themes/frontend/AllergyForm.css")
 public class FormStepperView extends VerticalLayout {
+
+    private FormFields formFields;
     private Button prevButton;
     private Button nextButton;
     private Button submitButton;
@@ -44,18 +46,20 @@ public class FormStepperView extends VerticalLayout {
         };
     }
 
-    public FormStepperView() {
+    public FormStepperView(FormFields formFields) {
+        this.formFields = formFields;
+
         // Create form layout for each step
         Div step1Layout = new Div();
-        Form1 form1 = new Form1();
+        Form1 form1 = new Form1(formFields);
         step1Layout.add(form1);
 
         Div step2Layout = new Div();
-        Form2 form2 = new Form2();
+        Form2 form2 = new Form2(formFields);
         step2Layout.add(form2);
 
         Div step3Layout = new Div();
-        Form3 form3 = new Form3();
+        Form3 form3 = new Form3(formFields);
         step3Layout.add(form3);
 
         formLayouts = new Div[]{step1Layout, step2Layout, step3Layout};
@@ -136,10 +140,19 @@ public class FormStepperView extends VerticalLayout {
 
         dialog.setConfirmText("Save");
 //        dialog.addConfirmListener(event -> createClickHandler(FormStepperView::createFormSubmitSuccess));
-        dialog.addConfirmListener(event -> Notification.show("Successfully Updated"));
+        dialog.addConfirmListener(event -> SendDataToBackend());
         dialog.open();
 
     };
+
+    public void SendDataToBackend () {
+
+        System.out.println("*************");
+        System.out.println(formFields);
+        System.out.println("*************");
+
+        Notification.show("Successfully Updated");
+    }
 
     public static Notification createFormSubmitSuccess() {
         Notification notification = new Notification();
