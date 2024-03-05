@@ -2,18 +2,18 @@ package com.example.application.views.component.formStepper;
 
 public class FormFields {
 
-    private String peanuts;
-    private String fish;
-    private String eggs;
-    private String butter;
-    private String soyProducts;
-    private String milk;
-    private String otherNuts;
-    private String sugar;
-    private String mushroom;
-    private String gluten;
-    private String mustard;
-    private String other;
+    private String peanuts = "Low";
+    private String fish = "Low";
+    private String eggs = "Low";
+    private String butter = "Low";
+    private String soyProducts = "Low";
+    private String milk = "Low";
+    private String otherNuts = "Low";
+    private String sugar = "Low";
+    private String mushroom = "Low";
+    private String gluten = "Low";
+    private String mustard = "Low";
+    private String otherReaction = "Low";
     private String otherFoods;
     private String timesOfReaction;
     private String lastReaction;
@@ -21,13 +21,11 @@ public class FormFields {
     private String symptomsExperienced;
     private String medicationAllergy;
     private String additionalNotes;
-
-
     public FormFields () {
 
     }
 
-    public FormFields(String peanuts, String fish, String eggs, String butter, String soyProducts, String milk, String otherNuts, String sugar, String mushroom, String gluten, String mustard, String other, String otherFoods, String timesOfReaction, String lastReaction, String causeOfReaction, String symptomsExperienced, String medicationAllergy, String additionalNotes) {
+    public FormFields(String peanuts, String fish, String eggs, String butter, String soyProducts, String milk, String otherNuts, String sugar, String mushroom, String gluten, String mustard, String otherReaction, String otherFoods, String timesOfReaction, String lastReaction, String causeOfReaction, String symptomsExperienced, String medicationAllergy, String additionalNotes, String riskLevel) {
         this.peanuts = peanuts;
         this.fish = fish;
         this.eggs = eggs;
@@ -39,7 +37,7 @@ public class FormFields {
         this.mushroom = mushroom;
         this.gluten = gluten;
         this.mustard = mustard;
-        this.other = other;
+        this.otherReaction = otherReaction;
         this.otherFoods = otherFoods;
         this.timesOfReaction = timesOfReaction;
         this.lastReaction = lastReaction;
@@ -53,152 +51,208 @@ public class FormFields {
         return peanuts;
     }
 
-    public void setPeanuts(String peanuts) {
-        this.peanuts = peanuts;
-    }
-
     public String getFish() {
         return fish;
-    }
-
-    public void setFish(String fish) {
-        this.fish = fish;
     }
 
     public String getEggs() {
         return eggs;
     }
 
-    public void setEggs(String eggs) {
-        this.eggs = eggs;
-    }
-
     public String getButter() {
         return butter;
-    }
-
-    public void setButter(String butter) {
-        this.butter = butter;
     }
 
     public String getSoyProducts() {
         return soyProducts;
     }
 
-    public void setSoyProducts(String soyProducts) {
-        this.soyProducts = soyProducts;
-    }
-
     public String getMilk() {
         return milk;
-    }
-
-    public void setMilk(String milk) {
-        this.milk = milk;
     }
 
     public String getOtherNuts() {
         return otherNuts;
     }
 
-    public void setOtherNuts(String otherNuts) {
-        this.otherNuts = otherNuts;
-    }
-
     public String getSugar() {
         return sugar;
-    }
-
-    public void setSugar(String sugar) {
-        this.sugar = sugar;
     }
 
     public String getMushroom() {
         return mushroom;
     }
 
-    public void setMushroom(String mushroom) {
-        this.mushroom = mushroom;
-    }
-
     public String getGluten() {
         return gluten;
-    }
-
-    public void setGluten(String gluten) {
-        this.gluten = gluten;
     }
 
     public String getMustard() {
         return mustard;
     }
 
-    public void setMustard(String mustard) {
-        this.mustard = mustard;
-    }
-
-    public String getOther() {
-        return other;
-    }
-
-    public void setOther(String other) {
-        this.other = other;
+    public String getOtherReaction() {
+        return otherReaction;
     }
 
     public String getOtherFoods() {
         return otherFoods;
     }
 
-    public void setOtherFoods(String otherFoods) {
-        this.otherFoods = otherFoods;
-    }
-
     public String getTimesOfReaction() {
         return timesOfReaction;
-    }
-
-    public void setTimesOfReaction(String timesOfReaction) {
-        this.timesOfReaction = timesOfReaction;
     }
 
     public String getLastReaction() {
         return lastReaction;
     }
 
-    public void setLastReaction(String lastReaction) {
-        this.lastReaction = lastReaction;
-    }
-
     public String getCauseOfReaction() {
         return causeOfReaction;
-    }
-
-    public void setCauseOfReaction(String causeOfReaction) {
-        this.causeOfReaction = causeOfReaction;
     }
 
     public String getSymptomsExperienced() {
         return symptomsExperienced;
     }
 
-    public void setSymptomsExperienced(String symptomsExperienced) {
-        this.symptomsExperienced = symptomsExperienced;
-    }
-
     public String getMedicationAllergy() {
         return medicationAllergy;
-    }
-
-    public void setMedicationAllergy(String medicationAllergy) {
-        this.medicationAllergy = medicationAllergy;
     }
 
     public String getAdditionalNotes() {
         return additionalNotes;
     }
 
+    public void setPeanuts(String peanuts) {
+        this.peanuts = peanuts;
+    }
+
+    public void setFish(String fish) {
+        this.fish = fish;
+    }
+
+    public void setEggs(String eggs) {
+        this.eggs = eggs;
+    }
+
+    public void setButter(String butter) {
+        this.butter = butter;
+    }
+
+    public void setSoyProducts(String soyProducts) {
+        this.soyProducts = soyProducts;
+    }
+
+    public void setMilk(String milk) {
+        this.milk = milk;
+    }
+
+    public void setOtherNuts(String otherNuts) {
+        this.otherNuts = otherNuts;
+    }
+
+    public void setSugar(String sugar) {
+        this.sugar = sugar;
+    }
+
+    public void setMushroom(String mushroom) {
+        this.mushroom = mushroom;
+    }
+
+    public void setGluten(String gluten) {
+        this.gluten = gluten;
+    }
+
+    public void setMustard(String mustard) {
+        this.mustard = mustard;
+    }
+
+    public void setOtherReaction(String otherReaction) {
+        this.otherReaction = otherReaction;
+    }
+
+    public void setOtherFoods(String otherFoods) {
+        this.otherFoods = otherFoods;
+    }
+
+    public void setTimesOfReaction(String timesOfReaction) {
+        this.timesOfReaction = timesOfReaction;
+    }
+
+    public void setLastReaction(String lastReaction) {
+        this.lastReaction = lastReaction;
+    }
+
+    public void setCauseOfReaction(String causeOfReaction) {
+        this.causeOfReaction = causeOfReaction;
+    }
+
+    public void setSymptomsExperienced(String symptomsExperienced) {
+        this.symptomsExperienced = symptomsExperienced;
+    }
+
+    public void setMedicationAllergy(String medicationAllergy) {
+        this.medicationAllergy = medicationAllergy;
+    }
+
     public void setAdditionalNotes(String additionalNotes) {
         this.additionalNotes = additionalNotes;
+    }
+
+    public void setReactionRiskLevel(String reaction, String riskLevel) {
+        switch (reaction.toLowerCase().trim()) {
+            case "peanuts":
+                setPeanuts(riskLevel);
+                break;
+            case "fish/shellfish":
+                setFish(riskLevel);
+                break;
+            case "peanutornutbutter":
+                setButter(riskLevel);
+                break;
+            case "soyproducts":
+                setSoyProducts(riskLevel);
+                break;
+            case "eggs":
+                setEggs(riskLevel);
+                break;
+            case "milk":
+                setMilk(riskLevel);
+                break;
+            case "treenuts(Walnuts,almonds,pecansetc.)":
+                setOtherNuts(riskLevel);
+                break;
+            case "sugar":
+                setSugar(riskLevel);
+                break;
+            case "mushroom":
+                setMushroom(riskLevel);
+                break;
+            case "gluten":
+                setGluten(riskLevel);
+                break;
+            case "mustard":
+                setMustard(riskLevel);
+                break;
+            default:
+                setOtherReaction(riskLevel);
+                break;
+        }
+    }
+
+    public void setDefaultValues() {
+        peanuts = "Low";
+        fish = "Low";
+        eggs = "Low";
+        butter = "Low";
+        soyProducts = "Low";
+        milk = "Low";
+        otherNuts = "Low";
+        sugar = "Low";
+        mushroom = "Low";
+        gluten = "Low";
+        mustard = "Low";
+        otherReaction = "Low";
     }
 
     @Override
@@ -215,7 +269,7 @@ public class FormFields {
                 ", mushroom='" + mushroom + '\'' +
                 ", gluten='" + gluten + '\'' +
                 ", mustard='" + mustard + '\'' +
-                ", other='" + other + '\'' +
+                ", otherReaction='" + otherReaction + '\'' +
                 ", otherFoods='" + otherFoods + '\'' +
                 ", timesOfReaction='" + timesOfReaction + '\'' +
                 ", lastReaction='" + lastReaction + '\'' +
@@ -223,6 +277,7 @@ public class FormFields {
                 ", symptomsExperienced='" + symptomsExperienced + '\'' +
                 ", medicationAllergy='" + medicationAllergy + '\'' +
                 ", additionalNotes='" + additionalNotes + '\'' +
+                ", riskLevel='" + fish + '\'' +
                 '}';
     }
 }
