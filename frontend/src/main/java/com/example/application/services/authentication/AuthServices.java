@@ -10,8 +10,7 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 public class AuthServices {
-    private RestTemplate restTemplate;
-
+    private static String authToken = "8IvE5eAQaaRJXSZKgw4CDUBbEy8G9GpfajrbuS4pJ79gS7yo4kx6of1nbOpwvTMU";
     private final HttpClient httpClient;
     private final String baseUrl;
 
@@ -31,22 +30,36 @@ public class AuthServices {
 
     private Object sendPostRequest(String endpoint, String inputData) {
         //<--set the Authentication token
-        String authToken = "8IvE5eAQaaRJXSZKgw4CDUBbEy8G9GpfajrbuS4pJ79gS7yo4kx6of1nbOpwvTMU";
+        String signUpAuthToken = "8IvE5eAQaaRJXSZKgw4CDUBbEy8G9GpfajrbuS4pJ79gS7yo4kx6of1nbOpwvTMU";
 
         try {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(baseUrl + endpoint))
                     .header("Content-Type", "application/json")
-                    .header("Authentication", "Barrier" + authToken)
+                    .header("Authentication", "Barrier" + signUpAuthToken)
                     .POST(HttpRequest.BodyPublishers.ofString(inputData))
                     .build();
 
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+            String token = ""; // Obtain token from response
+            if (token != null && !token.isEmpty()) {
+                authToken = token; // Store token upon successful login
+            }
+
             return response.body();
         } catch (Exception e) {
             Notification.show("There's a network connection problem. Please, check your internet and try again.");
             return Optional.empty();
         }
+    }
 
+    public static boolean isUserLoggedIn() {
+        return authToken != null;
+    }
+
+    public void logout() {
+        // Clear authentication token on logout
+        authToken = null;
     }
 }
