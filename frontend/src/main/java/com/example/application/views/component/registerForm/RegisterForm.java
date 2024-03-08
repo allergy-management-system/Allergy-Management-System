@@ -2,7 +2,7 @@ package com.example.application.views.component.registerForm;
 
 import com.example.application.services.User;
 import com.example.application.services.authentication.AuthServices;
-import com.example.application.views.pages.LoginPage;
+import com.example.application.views.pages.authentication.LoginPage;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -17,10 +17,6 @@ import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @CssImport("./themes/frontend/Register.css")
 public class RegisterForm extends VerticalLayout {
