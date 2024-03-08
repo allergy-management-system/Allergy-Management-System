@@ -1,13 +1,13 @@
 import { injectGlobalCss } from 'Frontend/generated/jar-resources/theme-util.js';
 
 import { css, unsafeCSS, registerStyles } from '@vaadin/vaadin-themable-mixin';
-import $cssFromFile_0 from 'Frontend/themes/frontend/AllergyForm.css?inline';
+import $cssFromFile_0 from 'Frontend/themes/frontend/Layout.css?inline';
 
 injectGlobalCss($cssFromFile_0.toString(), 'CSSImport end', document);
-import $cssFromFile_1 from 'Frontend/themes/frontend/Login.css?inline';
+import $cssFromFile_1 from 'Frontend/themes/frontend/AllergyForm.css?inline';
 
 injectGlobalCss($cssFromFile_1.toString(), 'CSSImport end', document);
-import $cssFromFile_2 from 'Frontend/themes/frontend/RecordAllergy.css?inline';
+import $cssFromFile_2 from 'Frontend/themes/frontend/Login.css?inline';
 
 injectGlobalCss($cssFromFile_2.toString(), 'CSSImport end', document);
 import $cssFromFile_3 from 'Frontend/themes/frontend/Register.css?inline';
@@ -16,7 +16,7 @@ injectGlobalCss($cssFromFile_3.toString(), 'CSSImport end', document);
 import $cssFromFile_4 from 'Frontend/themes/frontend/settings.css?inline';
 
 injectGlobalCss($cssFromFile_4.toString(), 'CSSImport end', document);
-import $cssFromFile_5 from 'Frontend/themes/frontend/layout.css?inline';
+import $cssFromFile_5 from 'Frontend/themes/frontend/Dashboard.css?inline';
 
 injectGlobalCss($cssFromFile_5.toString(), 'CSSImport end', document);
 import '@vaadin/polymer-legacy-adapter/style-modules.js';

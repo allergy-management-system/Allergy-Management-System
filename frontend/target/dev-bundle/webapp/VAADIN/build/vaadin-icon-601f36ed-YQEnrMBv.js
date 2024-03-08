@@ -1,0 +1,1 @@
+import{c3 as e,c2 as o}from"./indexhtml-WOccyQCs.js";const r={tagName:"vaadin-icon",displayName:"Icon",elements:[{selector:"vaadin-icon",displayName:"Icon",properties:[e.iconColor,e.iconSize,o.backgroundColor,o.borderColor,o.borderWidth,o.borderRadius]}]};export{r as default};
