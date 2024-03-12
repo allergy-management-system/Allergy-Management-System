@@ -2,6 +2,7 @@ package com.example.application.views;
 
 import com.example.application.views.pages.authentication.LoginPage;
 import com.example.application.views.pages.dashboard.Dashboard;
+import com.example.application.views.pages.history.History;
 import com.example.application.views.pages.profile.Profile;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -49,7 +50,8 @@ public class MainLayout extends AppLayout {
 
         nav.addItem(new SideNavItem("Dashboard", Dashboard.class, VaadinIcon.DASHBOARD.create()));
         nav.addItem(new SideNavItem("Profile", Profile.class, VaadinIcon.USER.create()));
-        nav.addItem(new SideNavItem("Logout", LoginPage.class, VaadinIcon.ARROW_RIGHT.create()));
+        nav.addItem(new SideNavItem("History", History.class, VaadinIcon.RECORDS.create()));
+        nav.addItem(new SideNavItem("Logout", LoginPage.class, VaadinIcon.SIGN_OUT_ALT.create()));
 
         return nav;
     }
