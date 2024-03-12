@@ -37,9 +37,3 @@ vaadin-confirm-dialog-overlay > [slot="confirm-button"]{
 vaadin-confirm-dialog-overlay > [slot="cancel-button"]{
     color: #F5CD58;
 }
-
-.notification-position {
-    position: absolute;
-    top: 4rem;
-    right: 1rem;
-}
