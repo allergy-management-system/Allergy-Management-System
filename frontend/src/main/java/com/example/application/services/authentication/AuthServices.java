@@ -38,12 +38,13 @@ public class AuthServices {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(baseUrl + endpoint))
                     .header("Content-Type", "application/json")
-                    .header("Authentication", "Barrier" + signUpAuthToken)
+//                    .header("Authentication", "Barrier" + signUpAuthToken)
                     .POST(HttpRequest.BodyPublishers.ofString(inputData))
                     .build();
 
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
+            System.out.println("Response Body: " + response.body());
             String token = response.body(); // Obtain token from response
             if (token != null && !token.isEmpty()) {
                 authToken = token; // Store token upon successful login
@@ -53,6 +54,7 @@ public class AuthServices {
                 // Parse JSON string
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonNode jsonNode = objectMapper.readTree((String) response.body());
+                System.out.println("jsonNode " + jsonNode);
 
                 return jsonNode.get("status").asText();
             } catch (Exception e) {
