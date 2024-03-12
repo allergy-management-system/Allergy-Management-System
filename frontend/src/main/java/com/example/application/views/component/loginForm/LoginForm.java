@@ -1,6 +1,9 @@
 package com.example.application.views.component.loginForm;
 
 import com.example.application.services.authentication.AuthServices;
+import com.example.application.views.component.notifications.Notifications;
+import com.example.application.views.pages.authentication.LoginPage;
+import com.example.application.views.pages.dashboard.Dashboard;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -25,7 +28,7 @@ import java.util.Optional;
 public class LoginForm extends VerticalLayout {
 ;
     private final AuthServices authServices;
-
+    Notifications alert = new Notifications();
         Map<String, Object> inputData = new HashMap<>();
         EmailField email = new EmailField("Email");
         PasswordField password = new PasswordField("Password");
@@ -74,33 +77,27 @@ public class LoginForm extends VerticalLayout {
             submitForm(inputData.toString());
         } else {
             String errorMessage = validationResult.getErrorMessage();
-            showErrorMessage(errorMessage);
+            alert.error("Invalid Credentials!", errorMessage);
         }
     }
 
     private void submitForm(String formData) {
-        Object authLogin = authServices.login(formData);
-        Notification.show("Login successful!");
-        // Navigate to the Dashboard page
-//        getUI().ifPresent(ui -> ui.navigate(Dashboard.class));
-        // Check if the response is an instance of ResponseEntity (assuming it's used for handling HTTP responses)
-        if (authLogin instanceof ResponseEntity<?>) {
-            // Cast the response to ResponseEntity<String> to access status code
-            ResponseEntity<String> responseEntity = (ResponseEntity<String>) authLogin;
-            //<--Check the response status
-            if (responseEntity.getStatusCode() == HttpStatus.OK) {
-                Notification.show("Login successful!");
-                // Navigate to the Dashboard page
-//                getUI().ifPresent(ui -> ui.navigate(Dashboard.class));
-            } else {
-                Notification.show("Login failed. Please try again.");
-            }
-        }
-        }
+        Object response = authServices.login(formData);
+        System.out.println(response);
 
-    private void showErrorMessage(String errorMessage) {
-        Notification.show(errorMessage);
-    }
+//        switch (response.toString()){
+//            case "null":
+//                alert.success("", "Registration successful!");
+//                getUI().ifPresent(ui -> ui.navigate(LoginPage.class));
+//                break;
+//            case "500":
+//                alert.error("User Exists!","User kofidsf@gmail.com already exists.");
+//                break;
+//            default:
+//                alert.error("Could not Register!", "It's not your fault, please try again after sometime.");
+//                break;
+//        }
+        }
 
     public class ValidationResult {
         private boolean isValid;
