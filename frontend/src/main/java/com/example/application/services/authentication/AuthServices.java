@@ -1,5 +1,7 @@
 package com.example.application.services.authentication;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.notification.Notification;
 import org.springframework.web.client.RestTemplate;
 
@@ -10,7 +12,7 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 public class AuthServices {
-    private static String authToken = "8IvE5eAQaaRJXSZKgw4CDUBbEy8G9GpfajrbuS4pJ79gS7yo4kx6of1nbOpwvTMU";
+    private static String authToken = "";
     private final HttpClient httpClient;
     private final String baseUrl;
 
@@ -42,14 +44,22 @@ public class AuthServices {
 
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-            String token = ""; // Obtain token from response
+            String token = response.body(); // Obtain token from response
             if (token != null && !token.isEmpty()) {
                 authToken = token; // Store token upon successful login
             }
 
-            return response.body();
+            try {
+                // Parse JSON string
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode jsonNode = objectMapper.readTree((String) response.body());
+
+                return jsonNode.get("status").asText();
+            } catch (Exception e) {
+                return "null";
+            }
+
         } catch (Exception e) {
-            Notification.show("There's a network connection problem. Please, check your internet and try again.");
             return Optional.empty();
         }
     }
