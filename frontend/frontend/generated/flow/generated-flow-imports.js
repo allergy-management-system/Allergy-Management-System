@@ -10,19 +10,27 @@ injectGlobalCss($cssFromFile_1.toString(), 'CSSImport end', document);
 import $cssFromFile_2 from 'Frontend/themes/frontend/Login.css?inline';
 
 injectGlobalCss($cssFromFile_2.toString(), 'CSSImport end', document);
-import $cssFromFile_3 from 'Frontend/themes/frontend/Register.css?inline';
+import $cssFromFile_3 from 'Frontend/themes/frontend/Notifications.css?inline';
 
 injectGlobalCss($cssFromFile_3.toString(), 'CSSImport end', document);
-import $cssFromFile_4 from 'Frontend/themes/frontend/settings.css?inline';
+import $cssFromFile_4 from 'Frontend/themes/frontend/Register.css?inline';
 
 injectGlobalCss($cssFromFile_4.toString(), 'CSSImport end', document);
-import $cssFromFile_5 from 'Frontend/themes/frontend/Dashboard.css?inline';
+import $cssFromFile_5 from 'Frontend/themes/frontend/settings.css?inline';
 
 injectGlobalCss($cssFromFile_5.toString(), 'CSSImport end', document);
+import $cssFromFile_6 from 'Frontend/themes/frontend/Dashboard.css?inline';
+
+injectGlobalCss($cssFromFile_6.toString(), 'CSSImport end', document);
+import $cssFromFile_7 from 'Frontend/themes/frontend/History.css?inline';
+
+injectGlobalCss($cssFromFile_7.toString(), 'CSSImport end', document);
 import '@vaadin/polymer-legacy-adapter/style-modules.js';
-import '@vaadin/horizontal-layout/theme/lumo/vaadin-horizontal-layout.js';
 import '@vaadin/app-layout/theme/lumo/vaadin-app-layout.js';
 import '@vaadin/vertical-layout/theme/lumo/vaadin-vertical-layout.js';
+import '@vaadin/dialog/theme/lumo/vaadin-dialog.js';
+import 'Frontend/generated/jar-resources/flow-component-renderer.js';
+import '@vaadin/horizontal-layout/theme/lumo/vaadin-horizontal-layout.js';
 import '@vaadin/field-highlighter/theme/lumo/vaadin-field-highlighter.js';
 import '@vaadin/common-frontend/ConnectionIndicator.js';
 import '@vaadin/accordion/theme/lumo/vaadin-accordion.js';
@@ -39,7 +47,6 @@ import '@vaadin/charts/theme/lumo/vaadin-chart.js';
 import '@vaadin/checkbox/theme/lumo/vaadin-checkbox.js';
 import '@vaadin/checkbox-group/theme/lumo/vaadin-checkbox-group.js';
 import '@vaadin/combo-box/theme/lumo/vaadin-combo-box.js';
-import 'Frontend/generated/jar-resources/flow-component-renderer.js';
 import 'Frontend/generated/jar-resources/comboBoxConnector.js';
 import '@vaadin/multi-select-combo-box/theme/lumo/vaadin-multi-select-combo-box.js';
 import '@vaadin/confirm-dialog/theme/lumo/vaadin-confirm-dialog.js';
@@ -61,7 +68,6 @@ import 'Frontend/generated/jar-resources/datepickerConnector.js';
 import '@vaadin/date-time-picker/theme/lumo/vaadin-date-time-picker.js';
 import '@vaadin/time-picker/theme/lumo/vaadin-time-picker.js';
 import 'Frontend/generated/jar-resources/vaadin-time-picker/timepickerConnector.js';
-import '@vaadin/dialog/theme/lumo/vaadin-dialog.js';
 import 'Frontend/generated/jar-resources/dndConnector.js';
 import '@vaadin/form-layout/theme/lumo/vaadin-form-layout.js';
 import '@vaadin/form-layout/theme/lumo/vaadin-form-item.js';

@@ -265,18 +265,22 @@
   "Frontend/generated/jar-resources/virtualListConnector.js",
   "Frontend/themes/frontend/AllergyForm.css",
   "Frontend/themes/frontend/Dashboard.css",
+  "Frontend/themes/frontend/History.css",
   "Frontend/themes/frontend/Layout.css",
   "Frontend/themes/frontend/Login.css",
+  "Frontend/themes/frontend/Notifications.css",
   "Frontend/themes/frontend/Register.css",
   "Frontend/themes/frontend/settings.css"
  ],
  "frontendHashes": {
   "themes/frontend/Layout.css": "5982b53a8dee8af6433eb197edaca93a651129204867fedc3ca1480e773fcb70",
-  "themes/frontend/AllergyForm.css": "9399e607b38ed1b4686c2deaf2f4e654e6c87a11503cfc0c4292f2f1843d6a28",
+  "themes/frontend/AllergyForm.css": "1f513a725e5470b17ccdb554faf2b00a92017541445fef67d654c714c0b3741b",
   "themes/frontend/Login.css": "daf4b76261309fc06b1b1003bb39807851dd1a5cf572f7fab6c8e8ccc4097296",
+  "themes/frontend/Notifications.css": "452a43125342f304d26f8f2e2589e9d5e018b82e8a987cc46bd83b6f6c009875",
   "themes/frontend/Register.css": "27b257a8c5fcfbb5a310b26e4fda59c44d992c4922fa047678a005d8344ca1d4",
   "themes/frontend/settings.css": "552774935c6d0f137665dcf665c09c535c42d5d892e94ac1e118d17fe029ac34",
-  "themes/frontend/Dashboard.css": "99d62e6ec11618a6f6c8087995fd2c33f81873c478674f432aa2e8a777293e9a",
+  "themes/frontend/Dashboard.css": "edf81fd1ae03acc20b05524d5de3eab3c2113ab6c962bca4194d648744705f25",
+  "themes/frontend/History.css": "3ffae0af85aaa98a6f3873eb561694422526e46fae332c71d2cd958d3f7269f1",
   "buttonFunctions.js": "c852123f9b2c44eb75e555119d3e05a7dbe78b91d0ab616feb9df1654474707d",
   "comboBoxConnector.js": "1d004c3dae9c76f8bcc68678abe1b8f7bdc8b456f5c9c4c7f190df8ed25d66cd",
   "contextMenuConnector.js": "b3e8b1b38de09aa65321338d3c149e18b4c5b53959ba134afe3be2d14942d86d",
@@ -303,7 +307,7 @@
   "frontend": "{\n  \"lumoImports\" : [ \"typography\", \"color\", \"spacing\", \"badge\", \"utility\" ]\n}"
  },
  "entryScripts": [
-  "VAADIN/build/indexhtml-WOccyQCs.js"
+  "VAADIN/build/indexhtml-GE3HoQKM.js"
  ],
  "webComponents": [],
  "cvdlModules": {
@@ -338,6 +342,6 @@
  },
  "packageJsonHash": "aa07176bb324d6a387237e3369d9e5dc6ff75048fd481c0f481acac472ac9abb",
  "indexHtmlGenerated": [
-  "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-WOccyQCs.js\"></script>"
+  "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-GE3HoQKM.js\"></script>"
  ]
 }
