@@ -55,7 +55,9 @@ public class Form1 extends Div {
 
             riskLevel.addValueChangeListener(event -> {
                 String selectedValue = event.getValue();
-                formFields.setReactionRiskLevel(reaction.getLabel(), selectedValue);
+                if (selectedValue == "High") {
+                    formFields.setReactionRiskLevel(reaction.getLabel(), reaction.getLabel());
+                }
             });
 
             riskLevel.getStyle().setMarginLeft("5rem");
