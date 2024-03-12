@@ -1,5 +1,10 @@
 package com.example.application.services.dashboard;
 
+import com.example.application.views.component.formStepper.FormFields;
+import com.vaadin.flow.component.notification.Notification;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -11,46 +16,66 @@ public class UsersServices {
 
     private final HttpClient httpClient;
     private final String baseUrl;
-//    private final String authToken;
+
+    private final String chatEndpoint;
+
+    private final RestTemplate restTemplate;
+    private RestTemplate requestBody;
 
     public UsersServices() {
         this.httpClient = HttpClient.newHttpClient();
-        this.baseUrl = "https://allergy-u6fk.onrender.com/api/v1";
-//        this.authToken = authToken;
+        this.baseUrl = "https://2cd6-196-61-44-226.ngrok-free.app";
+
+        this.chatEndpoint = baseUrl + "/api/v1/allergy/chat";
+        restTemplate = new RestTemplate();
     }
 
-    public Optional<String> getAllUsers() {
-        return sendGetRequest("/getAllUsers");
-    }
-
-    private Optional<String> sendGetRequest(String endpoint) {
-        return sendRequest(endpoint, HttpRequest.newBuilder().GET());
-    }
-
-    private Optional<String> sendPostRequest(String endpoint, Map<String, Object> data) {
-        return sendRequest(endpoint, HttpRequest.newBuilder().POST(HttpRequest.BodyPublishers.ofString(data.toString())));
-    }
-
-    private Optional<String> sendDeleteRequest(String endpoint) {
-        return sendRequest(endpoint, HttpRequest.newBuilder().DELETE());
-    }
-
-    private Optional<String> sendPatchRequest(String endpoint, Map<String, Object> data) {
-        return sendRequest(endpoint, HttpRequest.newBuilder().method("PATCH", HttpRequest.BodyPublishers.ofString(data.toString())));
-    }
-
-    private Optional<String> sendRequest(String endpoint, HttpRequest.Builder requestBuilder) {
+    public String sendMessageParams(MultiValueMap<String, String> requestBody) {
         try {
-            HttpRequest request = requestBuilder
+            String response;
+
+            response = restTemplate.postForObject("https://2cd6-196-61-44-226.ngrok-free.app/api/v1/allergy/chat", requestBody, String.class);
+            return response;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Object sendMessage(String message) {
+        return sendPostRequest("/api/v1/allergy/chat", message);
+    }
+
+    private Object sendPostRequest(String endpoint ,String inputData) {
+
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(baseUrl + endpoint))
-//                    .header("Authorization", "Bearer " + authToken)
                     .header("Content-Type", "application/json")
-                    .header("Accept", "application/json")
-                    .header("Access-Control-Allow-Headers", "Content-Type")
+                    .POST(HttpRequest.BodyPublishers.ofString(inputData))
                     .build();
 
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            return Optional.of(response.body());
+
+            return response.body();
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    public Object getAllHistory() {
+        return sendGetRequest("/api/v1/allergy/chat");
+    }
+
+    private Object sendGetRequest(String endpoint) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(baseUrl + endpoint))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+            return response.body();
         } catch (Exception e) {
             e.printStackTrace();
             return Optional.empty();
