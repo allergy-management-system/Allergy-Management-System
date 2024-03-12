@@ -25,7 +25,7 @@ public class Dashboard extends Div implements BeforeEnterObserver {
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
         // Check if the user is authenticated
-        if (!AuthServices.isUserLoggedIn()) {
+        if (AuthServices.isUserLoggedIn()) {
             event.rerouteTo(LoginPage.class); // Redirect to login page if not logged in
         }
     }
