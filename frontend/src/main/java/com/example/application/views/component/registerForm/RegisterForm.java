@@ -2,7 +2,11 @@ package com.example.application.views.component.registerForm;
 
 import com.example.application.services.User;
 import com.example.application.services.authentication.AuthServices;
+import com.example.application.views.component.notifications.Notifications;
 import com.example.application.views.pages.authentication.LoginPage;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -22,7 +26,7 @@ import org.springframework.http.ResponseEntity;
 public class RegisterForm extends VerticalLayout {
 
     private final AuthServices authServices;
-
+    Notifications alert = new Notifications();
     User user = new User();
 
     TextField name = new TextField("Name");
@@ -73,7 +77,7 @@ public class RegisterForm extends VerticalLayout {
             submitForm(name.getValue(), email.getValue(), password.getValue());
         } else {
             String errorMessage = validationResult.getErrorMessage();
-            showErrorMessage(errorMessage);
+            alert.error("Invalid Credentials!", errorMessage);
         }
     }
 
@@ -85,27 +89,23 @@ public class RegisterForm extends VerticalLayout {
         user.setPassword(String.valueOf(password));
         user.setDateOfBirth("12/23/2004");
 
-        Object authLogin = authServices.register(user.toJson());
-        Notification.show("Registration successful!");
-        // Navigate to the Login page
-        getUI().ifPresent(ui -> ui.navigate(LoginPage.class));
-        // Check if the response is an instance of ResponseEntity (assuming it's used for handling HTTP responses)
-        if (authLogin instanceof ResponseEntity<?>) {
-            // Cast the response to ResponseEntity<String> to access status code
-            ResponseEntity<String> responseEntity = (ResponseEntity<String>) authLogin;
-            //<--Check the response status
-            if (responseEntity.getStatusCode() == HttpStatus.OK) {
-                Notification.show("Registration successful!");
-                // Navigate to the Login page
-                getUI().ifPresent(ui -> ui.navigate(LoginPage.class));
-            } else {
-                Notification.show("Registration failed. Please try again.");
-            }
-        }
-    }
+        Object response = authServices.register(user.toJson());
 
-    private void showErrorMessage(String errorMessage) {
-        Notification.show(errorMessage);
+        switch (response.toString()){
+            case "null":
+                alert.success("Registration successful!", "...");
+                getUI().ifPresent(ui -> ui.navigate(LoginPage.class));
+                break;
+            case "500":
+                alert.error("User Exists!","User kofidsf@gmail.com already exists.");
+                break;
+            case "Optional.empty":
+                alert.error("Connection Error!","There's a network connection problem. Please, check your internet and try again.");
+            default:
+                alert.error("Could not Register!", "It's not your fault, please try again after sometime.");
+                break;
+        }
+
     }
 
     public class ValidationResult {
