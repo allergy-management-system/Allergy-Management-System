@@ -85,18 +85,18 @@ public class LoginForm extends VerticalLayout {
         Object response = authServices.login(formData);
         System.out.println(response);
 
-        switch (response.toString()){
-            case "null":
-                alert.success("Login successful!", "...");
-                getUI().ifPresent(ui -> ui.navigate(LoginPage.class));
-                break;
-            case "500":
-                alert.error("User Exists!","User kofidsf@gmail.com already exists.");
-                break;
-            default:
-                alert.error("Could not Register!", "It's not your fault, please try again after sometime.");
-                break;
-        }
+//        switch (response.toString()){
+//            case "null":
+//                alert.success("", "Registration successful!");
+//                getUI().ifPresent(ui -> ui.navigate(LoginPage.class));
+//                break;
+//            case "500":
+//                alert.error("User Exists!","User kofidsf@gmail.com already exists.");
+//                break;
+//            default:
+//                alert.error("Could not Register!", "It's not your fault, please try again after sometime.");
+//                break;
+//        }
         }
 
     public class ValidationResult {
