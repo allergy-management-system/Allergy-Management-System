@@ -1,0 +1,5 @@
+<<<<<<<< HEAD:frontend/target/dev-bundle/webapp/VAADIN/build/vaadin-app-layout-e56de2e9-BEOWMW4G.js
+import{c2 as a}from"./indexhtml-wbxNgqLu.js";const r={tagName:"vaadin-app-layout",displayName:"App Layout",elements:[{selector:"vaadin-app-layout",displayName:"Layout",properties:[a.backgroundColor]},{selector:"vaadin-app-layout::part(drawer)",displayName:"Drawer",properties:[a.backgroundColor,a.padding]},{selector:"vaadin-app-layout::part(navbar)",displayName:"Navbar",properties:[a.backgroundColor,a.padding]}]};export{r as default};
+========
+import{c2 as a}from"./indexhtml-GE3HoQKM.js";const r={tagName:"vaadin-app-layout",displayName:"App Layout",elements:[{selector:"vaadin-app-layout",displayName:"Layout",properties:[a.backgroundColor]},{selector:"vaadin-app-layout::part(drawer)",displayName:"Drawer",properties:[a.backgroundColor,a.padding]},{selector:"vaadin-app-layout::part(navbar)",displayName:"Navbar",properties:[a.backgroundColor,a.padding]}]};export{r as default};
+>>>>>>>> frontend-Emma:frontend/target/dev-bundle/webapp/VAADIN/build/vaadin-app-layout-e56de2e9-mx0jMz4a.js

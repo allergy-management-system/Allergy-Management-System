@@ -1,0 +1,5 @@
+<<<<<<<< HEAD:frontend/target/dev-bundle/webapp/VAADIN/build/vaadin-avatar-vSnZPQaf-woD9qDYd.js
+import{K as a,o as r,e as o,I as e}from"./indexhtml-wbxNgqLu.js";const i={tagName:"vaadin-avatar",displayName:"Avatar",elements:[{selector:"vaadin-avatar",displayName:"Root element",properties:[a.backgroundColor,a.borderColor,a.borderWidth,{propertyName:"--vaadin-avatar-size",displayName:"Size",editorType:r.range,presets:o.lumoSize,icon:"square"}]},{selector:"vaadin-avatar::part(abbr)",displayName:"Abbreviation",properties:[e.textColor,e.fontWeight]}]};export{i as default};
+========
+import{K as a,o as r,e as o,I as e}from"./indexhtml-GE3HoQKM.js";const i={tagName:"vaadin-avatar",displayName:"Avatar",elements:[{selector:"vaadin-avatar",displayName:"Root element",properties:[a.backgroundColor,a.borderColor,a.borderWidth,{propertyName:"--vaadin-avatar-size",displayName:"Size",editorType:r.range,presets:o.lumoSize,icon:"square"}]},{selector:"vaadin-avatar::part(abbr)",displayName:"Abbreviation",properties:[e.textColor,e.fontWeight]}]};export{i as default};
+>>>>>>>> frontend-Emma:frontend/target/dev-bundle/webapp/VAADIN/build/vaadin-avatar-vSnZPQaf-lBPqWfAS.js

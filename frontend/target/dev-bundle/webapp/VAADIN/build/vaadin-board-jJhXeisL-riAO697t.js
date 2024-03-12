@@ -1,0 +1,5 @@
+<<<<<<<< HEAD:frontend/target/dev-bundle/webapp/VAADIN/build/vaadin-board-jJhXeisL-tvqxH5I7.js
+import{K as o}from"./indexhtml-wbxNgqLu.js";const a={tagName:"vaadin-board",displayName:"Board",elements:[{selector:"vaadin-board",displayName:"Layout",properties:[o.backgroundColor,o.borderColor,o.borderWidth,o.borderRadius,o.padding]},{selector:"vaadin-board vaadin-board-row",displayName:"Row",properties:[o.backgroundColor,o.borderColor,o.borderWidth,o.borderRadius,o.padding]}]};export{a as default};
+========
+import{K as o}from"./indexhtml-GE3HoQKM.js";const a={tagName:"vaadin-board",displayName:"Board",elements:[{selector:"vaadin-board",displayName:"Layout",properties:[o.backgroundColor,o.borderColor,o.borderWidth,o.borderRadius,o.padding]},{selector:"vaadin-board vaadin-board-row",displayName:"Row",properties:[o.backgroundColor,o.borderColor,o.borderWidth,o.borderRadius,o.padding]}]};export{a as default};
+>>>>>>>> frontend-Emma:frontend/target/dev-bundle/webapp/VAADIN/build/vaadin-board-jJhXeisL-riAO697t.js
