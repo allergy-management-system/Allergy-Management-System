@@ -2,24 +2,24 @@ package com.example.application.views.component.formStepper;
 
 public class FormFields {
 
-    private String peanuts = "Low";
-    private String fish = "Low";
-    private String eggs = "Low";
-    private String butter = "Low";
-    private String soyProducts = "Low";
-    private String milk = "Low";
-    private String otherNuts = "Low";
-    private String sugar = "Low";
-    private String mushroom = "Low";
-    private String gluten = "Low";
-    private String mustard = "Low";
-    private String otherReaction;
-    private String timesOfReaction;
-    private String lastReaction;
-    private String causeOfReaction;
-    private String symptomsExperienced;
-    private String medicationAllergy;
-    private String additionalNotes;
+    private String peanuts = "";
+    private String fish = "";
+    private String eggs = "";
+    private String butter = "";
+    private String soyProducts = "";
+    private String milk = "";
+    private String otherNuts = "";
+    private String sugar = "";
+    private String mushroom = "";
+    private String gluten = "";
+    private String mustard = "";
+    private String otherReaction = "";
+    private String timesOfReaction = "";
+    private String lastReaction = "";
+    private String causeOfReaction = "";
+    private String symptomsExperienced = "";
+    private String medicationAllergy = "";
+    private String additionalNotes = "";
     public FormFields () {
 
     }
@@ -231,17 +231,17 @@ public class FormFields {
     }
 
     public void setDefaultValues() {
-        peanuts = "Low";
-        fish = "Low";
-        eggs = "Low";
-        butter = "Low";
-        soyProducts = "Low";
-        milk = "Low";
-        otherNuts = "Low";
-        sugar = "Low";
-        mushroom = "Low";
-        gluten = "Low";
-        mustard = "Low";
+        peanuts = null;
+        fish = null;
+        eggs = null;
+        butter = null;
+        soyProducts = null;
+        milk = null;
+        otherNuts = null;
+        sugar = null;
+        mushroom = null;
+        gluten = null;
+        mustard = null;
     }
 
     @Override
