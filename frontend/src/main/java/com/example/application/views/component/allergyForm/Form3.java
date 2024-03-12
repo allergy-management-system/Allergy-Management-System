@@ -2,6 +2,8 @@ package com.example.application.views.component.allergyForm;
 
 import com.example.application.views.component.formStepper.FormFields;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.checkbox.CheckboxGroup;
+import com.vaadin.flow.component.checkbox.CheckboxGroupVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
@@ -10,6 +12,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.radiobutton.RadioGroupVariant;
 import com.vaadin.flow.component.textfield.TextArea;
+
+import java.util.Set;
 
 @CssImport("./themes/frontend/AllergyForm.css")
 public class Form3 extends Div {
@@ -26,10 +30,14 @@ public class Form3 extends Div {
         titleGroup.addClassName("title-group");
 
         Paragraph label1 = new Paragraph("Have you ever experienced any of these symptoms");
-        TextArea experience = new TextArea();
+
+        CheckboxGroup<String> experience = new CheckboxGroup<>();
+        experience.setItems("Itching", "Rash", "Sneezing", " Coughing");
+        experience.addThemeVariants(CheckboxGroupVariant.LUMO_VERTICAL);
+
         experience.addValueChangeListener(event -> {
-            String newValue = event.getValue();
-            formFields.setSymptomsExperienced(newValue);
+            Set<String> selectedAllergies = event.getValue();
+            formFields.setSymptomsExperienced(selectedAllergies.toString());
         });
 
         experience.setWidthFull();
@@ -53,7 +61,7 @@ public class Form3 extends Div {
         verticalGroup2.addClassName("vertical-group");
         verticalGroup2.add(label2, medication);
 
-        Paragraph label3 = new Paragraph("Have you ever experienced any of these symptoms");
+        Paragraph label3 = new Paragraph("Additional notes you want to add");
         TextArea notes = new TextArea();
 
         notes.addValueChangeListener(event -> {
