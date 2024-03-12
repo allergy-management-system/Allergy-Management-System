@@ -1,5 +1,6 @@
 package com.example.application.views.pages.dashboard;
 
+import com.example.application.services.dashboard.UsersServices;
 import com.example.application.views.MainLayout;
 import com.example.application.views.component.formStepper.FormFields;
 import com.example.application.views.component.formStepper.FormStepperView;
@@ -11,7 +12,8 @@ import com.vaadin.flow.router.Route;
 @Route(value = "record-allergy-form", layout = MainLayout.class)
 public class RecordAllergyForm extends Div {
     FormFields currentFormFields = new FormFields();
-    FormStepperView formStepperView = new FormStepperView(currentFormFields);
+    UsersServices usersServices = new UsersServices();
+    FormStepperView formStepperView = new FormStepperView(currentFormFields, usersServices);
     public RecordAllergyForm () {
 
         add(formStepperView);
