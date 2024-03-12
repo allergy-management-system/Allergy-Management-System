@@ -1,20 +1,18 @@
 package com.example.application.views.component.formStepper;
 
-import com.example.application.components.Notifications;
+import com.example.application.services.dashboard.UsersServices;
 import com.example.application.views.component.allergyForm.Form1;
 import com.example.application.views.component.allergyForm.Form2;
 import com.example.application.views.component.allergyForm.Form3;
-import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.ComponentEventListener;
+import com.example.application.views.component.modal.Modal;
+import com.example.application.views.component.notifications.Notifications;
+import com.nimbusds.jose.shaded.gson.Gson;
 import com.vaadin.flow.component.HtmlComponent;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.html.Anchor;
-import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
@@ -22,12 +20,19 @@ import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.dom.Style;
-
-import java.util.function.Supplier;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 @CssImport("./themes/frontend/AllergyForm.css")
 public class FormStepperView extends VerticalLayout {
 
+    private final UsersServices usersServices;
+    Notifications alert = new Notifications();
+
+    private RestTemplate restTemplate;
+
+    private Modal openModal;
     private FormFields formFields;
     private Button prevButton;
     private Button nextButton;
@@ -35,8 +40,9 @@ public class FormStepperView extends VerticalLayout {
     private int currentStep = 0;
     private Div[] formLayouts;
 
-    public FormStepperView(FormFields formFields) {
+    public FormStepperView(FormFields formFields, UsersServices usersServices) {
         this.formFields = formFields;
+        this.usersServices = usersServices;
 
         // Create form layout for each step
         Div step1Layout = new Div();
@@ -135,44 +141,43 @@ public class FormStepperView extends VerticalLayout {
 
     public void SendDataToBackend () {
 
-        System.out.println("*************");
-        System.out.println(formFields);
-        System.out.println("*************");
+        restTemplate = new RestTemplate();
 
-        show().setClassName("notification-position");
+        // Prepare request body data
+        MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
 
-    }
+        requestBody.add("peanuts", formFields.getPeanuts());
+        requestBody.add("fish", formFields.getFish());
+        requestBody.add("eggs", formFields.getEggs());
+        requestBody.add("butter", formFields.getButter());
+        requestBody.add("soyProducts", formFields.getSoyProducts());
+        requestBody.add("milk", formFields.getMilk());
+        requestBody.add("otherNuts", formFields.getOtherNuts());
+        requestBody.add("sugar", formFields.getSugar());
+        requestBody.add("mushrooms", formFields.getMushroom());
+        requestBody.add("gluten", formFields.getGluten());
+        requestBody.add("mustard", formFields.getMustard());
+//        requestBody.add("otherFoods", formFields.getOtherFoods());
+        requestBody.add("timesOfReaction", formFields.getTimesOfReaction());
+        requestBody.add("lastReaction", formFields.getLastReaction());
+        requestBody.add("causeOfReaction", formFields.getCauseOfReaction());
+        requestBody.add("symptomExperienced", formFields.getSymptomsExperienced());
+        requestBody.add("medicationAllergy", formFields.getMedicationAllergy());
+        requestBody.add("additionalNotes", formFields.getAdditionalNotes());
 
-    public Notification show() {
-        // When creating a notification using the constructor,
-        // the duration is 0-sec by default which means that
-        // the notification does not close automatically.
-        Notification notification = new Notification();
-        notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
-        notification.setDuration(5000);
-        notification.setPosition(Notification.Position.TOP_END);
 
-        Div text = new Div(
-                new Text("Form submission successful."),
-                new HtmlComponent("br"),
-                new Text("your allergy form has successfully  been submitted")
-        );
+        String response = usersServices.sendMessageParams(requestBody);
 
-        Button closeButton = new Button(new Icon("lumo", "cross"));
-        closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
-        closeButton.setAriaLabel("Close");
-        closeButton.addClickListener(event -> {
-            notification.close();
-        });
+        System.out.println("Response: " + response);
 
-        HorizontalLayout layout = new HorizontalLayout(text, closeButton);
-        layout.setAlignItems(Alignment.CENTER);
+        if(response != null){
+            alert.success("Form Submitted Successfully!", "Please go to your history...");
 
-        notification.add(layout);
-        notification.open();
+            openModal = new Modal(response);
+            openModal.open();
+        } else {
+            alert.error("Failed to send request.", "Please check your internet connection or your network and try again.");
+        }
 
-        notification.setPosition(Notification.Position.MIDDLE);
-
-        return notification;
     }
 }
