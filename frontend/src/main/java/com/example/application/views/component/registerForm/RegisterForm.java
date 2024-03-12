@@ -89,20 +89,23 @@ public class RegisterForm extends VerticalLayout {
         user.setPassword(String.valueOf(password));
         user.setDateOfBirth("12/23/2004");
 
-        Object response = authServices.register(user.toJson());
+        Object response = authServices.registerUser(user.toJson());
 
         switch (response.toString()){
-            case "null":
+            case "200":
                 alert.success("Registration successful!", "...");
                 getUI().ifPresent(ui -> ui.navigate(LoginPage.class));
                 break;
             case "500":
                 alert.error("User Exists!","User kofidsf@gmail.com already exists.");
                 break;
+            case "404":
+                alert.error("Connection Error!","This is not your fault. Please try again after sometime.");
+                break;
             case "Optional.empty":
                 alert.error("Connection Error!","There's a network connection problem. Please, check your internet and try again.");
             default:
-                alert.error("Could not Register!", "It's not your fault, please try again after sometime.");
+                alert.error("Registration failed!", "Please try again.");
                 break;
         }
 
