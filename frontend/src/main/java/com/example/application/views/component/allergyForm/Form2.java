@@ -28,7 +28,7 @@ public class Form2 extends Div {
         titleGroup.add(title, subTitle);
         titleGroup.addClassName("title-group");
 
-        Paragraph label1 = new Paragraph("Please enter all of the other foods that have caused an allergic reaction");
+        Paragraph label1 = new Paragraph("Have you noticed any specific triggers or patterns associated with your allergic reactions? (e.g., certain foods, medications, insect stings, environmental factors)");
         TextArea courseOfReaction = new TextArea();
 
         courseOfReaction.addValueChangeListener(event -> {
