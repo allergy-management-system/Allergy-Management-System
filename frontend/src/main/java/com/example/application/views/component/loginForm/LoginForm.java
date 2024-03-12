@@ -82,19 +82,21 @@ public class LoginForm extends VerticalLayout {
     }
 
     private void submitForm(String formData) {
-        Object response = authServices.login(formData);
-        System.out.println(response);
+        Object response = authServices.loginUser(formData);
+        System.out.println("Okay res: " + response);
 
         switch (response.toString()){
-            case "null":
+            case "200":
                 alert.success("Login successful!", "...");
                 getUI().ifPresent(ui -> ui.navigate(LoginPage.class));
                 break;
             case "500":
-                alert.error("User Exists!","User kofidsf@gmail.com already exists.");
+                alert.error("User does not exist!","Email or password not found.");
                 break;
+            case "Optional.empty":
+                alert.error("Connection Error!","There's a network connection problem. Please, check your internet and try again.");
             default:
-                alert.error("Could not Register!", "It's not your fault, please try again after sometime.");
+                alert.error("Registration failed!", "Please try again.");
                 break;
         }
         }

@@ -33,11 +33,10 @@ public class UsersServices {
     public String sendMessageParams(MultiValueMap<String, String> requestBody) {
         try {
             String response;
-
             response = restTemplate.postForObject("https://2cd6-196-61-44-226.ngrok-free.app/api/v1/allergy/chat", requestBody, String.class);
             return response;
         } catch (Exception e) {
-            return null;
+            return String.valueOf(e);
         }
     }
 

@@ -166,9 +166,14 @@ public class FormStepperView extends VerticalLayout {
         requestBody.add("additionalNotes", formFields.getAdditionalNotes());
 
 
-        String response = usersServices.sendMessageParams(requestBody);
+        var response = usersServices.sendMessageParams(requestBody);
 
         System.out.println("Response: " + response);
+
+//        switch (response.toString()) {7
+//            case "null":
+//
+//        }
 
         if(response != null){
             alert.success("Form Submitted Successfully!", "Please go to your history...");
