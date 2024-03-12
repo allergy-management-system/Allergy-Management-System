@@ -1,0 +1,44 @@
+.page {
+    display: flex;
+    flex-wrap: wrap;
+    /*padding: 0 2rem;*/
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    background: #EFEFEF;
+    /*padding: 1rem 0;*/
+    /*margin-top: 5rem;*/
+    width: 100%;
+    height: 150px;
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+}
+
+.grid {
+    width: 90%;
+    margin: 0 auto;
+}
+
+vaadin-grid::part(header-cell) {
+    padding-left: 1rem;
+    --vaadin-grid-cell-background: #F5CD58;
+}
+
+vaadin-grid::part(header-cell), vaadin-grid::part(body-cell) {
+    padding-left: 1rem;
+}
+
+vaadin-grid::part(body-cell) {
+    padding: 1rem;
+}
+
+
+vaadin-grid::part(even-row-cell) {
+    --vaadin-grid-cell-background: #3A3A3A14;
+}
+
+.open-button {
+    --vaadin-button-tertiary-text-color: #F5CD58;
+}
