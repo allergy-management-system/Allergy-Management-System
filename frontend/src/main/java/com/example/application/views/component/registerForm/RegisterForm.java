@@ -28,8 +28,7 @@ public class RegisterForm extends VerticalLayout {
     private final AuthServices authServices;
     Notifications alert = new Notifications();
     User user = new User();
-
-    TextField name = new TextField("Name");
+    TextField firstName = new TextField("Name");
     EmailField email = new EmailField("Email");
     PasswordField password = new PasswordField("Password");
     Button button = new Button("Sign up");
@@ -43,8 +42,8 @@ public class RegisterForm extends VerticalLayout {
         H2 title = new H2("Create your free account");
         title.addClassName("title");
 
-        name.setPlaceholder("Type your name");
-        name.addClassName("text-field");
+        firstName.setPlaceholder("Type your Firstname");
+        firstName.addClassName("text-field");
 
         email.setPlaceholder("Type your email");
         email.addClassName("text-field");
@@ -64,30 +63,27 @@ public class RegisterForm extends VerticalLayout {
         footerText.add(alreadyHaveAnAccount, signIn);
         footerText.setAlignItems(Alignment.CENTER);
 
-        form.add(title, name, email, password, button, footerText);
+        form.add(title, firstName, email, password, button, footerText);
 
         add(form);
     }
 
     private void register() {
 
-        RegisterForm.ValidationResult validationResult = validateForm(name.getValue(), email.getValue(), password.getValue());
+        RegisterForm.ValidationResult validationResult = validateForm(firstName.getValue(), email.getValue(), password.getValue());
 
         if (validationResult.isValid()) {
-            submitForm(name.getValue(), email.getValue(), password.getValue());
+            submitForm(firstName.getValue(), email.getValue(), password.getValue());
         } else {
             String errorMessage = validationResult.getErrorMessage();
             alert.error("Invalid Credentials!", errorMessage);
         }
     }
 
-    private void submitForm(String name, String email, String password) {
-        user.setFirstName(String.valueOf(name));
-        user.setLastName("Larry");
+    private void submitForm(String firstName, String email, String password) {
+        user.setFirstName(String.valueOf(firstName));
         user.setEmail(String.valueOf(email));
-        user.setGender("male");
         user.setPassword(String.valueOf(password));
-        user.setDateOfBirth("12/23/2004");
 
         Object response = authServices.registerUser(user.toJson());
 
@@ -129,13 +125,13 @@ public class RegisterForm extends VerticalLayout {
         }
     }
 
-    public RegisterForm.ValidationResult validateForm(String name,String email, String password) {
+    public RegisterForm.ValidationResult validateForm(String firstName,String email, String password) {
         // Trim input strings
         email = email.trim();
         password = password.trim();
 
         // Check for null or empty strings
-        if (name.isEmpty() ||email.isEmpty() || password.isEmpty()) {
+        if (firstName.isEmpty() ||email.isEmpty() || password.isEmpty()) {
             return new RegisterForm.ValidationResult(false, "Email and password are required.");
         }
 
