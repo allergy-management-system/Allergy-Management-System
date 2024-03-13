@@ -2,7 +2,6 @@ package com.example.application.views.component.loginForm;
 
 import com.example.application.services.authentication.AuthServices;
 import com.example.application.views.component.notifications.Notifications;
-import com.example.application.views.pages.authentication.LoginPage;
 import com.example.application.views.pages.dashboard.Dashboard;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
@@ -10,26 +9,21 @@ import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 
 @CssImport("./themes/frontend/Login.css")
 public class LoginForm extends VerticalLayout {
 ;
     private final AuthServices authServices;
+
     Notifications alert = new Notifications();
-        Map<String, Object> inputData = new HashMap<>();
         EmailField email = new EmailField("Email");
         PasswordField password = new PasswordField("Password");
         Button button = new Button("Sign in");
@@ -68,35 +62,36 @@ public class LoginForm extends VerticalLayout {
         }
 
     private void login() {
-        inputData.put("email", email.getValue());
-        inputData.put("password", password.getValue());
 
         ValidationResult validationResult = validateForm(email.getValue());
 
         if (validationResult.isValid()) {
-            submitForm(inputData.toString());
+            submitForm(email.getValue(), password.getValue());
         } else {
             String errorMessage = validationResult.getErrorMessage();
             alert.error("Invalid Credentials!", errorMessage);
         }
     }
 
-    private void submitForm(String formData) {
-        Object response = authServices.loginUser(formData);
-        System.out.println("Okay res: " + response);
+    private void submitForm(String email, String password)  {
+
+        MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
+
+        requestBody.add("email", String.valueOf(email));
+        requestBody.add("password", String.valueOf(password));
+
+        Object response = authServices.loginUser(requestBody);
 
         switch (response.toString()){
             case "200":
                 alert.success("Login successful!", "...");
-                getUI().ifPresent(ui -> ui.navigate(LoginPage.class));
+                getUI().ifPresent(ui -> ui.navigate(Dashboard.class));
                 break;
             case "500":
                 alert.error("User does not exist!","Email or password not found.");
                 break;
-            case "Optional.empty":
-                alert.error("Connection Error!","There's a network connection problem. Please, check your internet and try again.");
             default:
-                alert.error("Registration failed!", "Please try again.");
+                alert.error("Login failed!", "Please try again.");
                 break;
         }
         }
