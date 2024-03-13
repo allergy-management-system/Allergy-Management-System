@@ -1,12 +1,13 @@
 package com.example.application.views.pages.profile;
 
-import com.example.application.views.component.upload1.uploadSet;
-import com.vaadin.flow.component.Component;
+import com.example.application.views.MainLayout;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
-import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.html.*;
-import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.H4;
+import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
@@ -15,32 +16,32 @@ import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 
-import javax.swing.*;
+@PageTitle("Profile")
+@Route(value = "profile", layout = MainLayout.class)
+public class Profile extends Div {
 
-@CssImport("./themes/frontend/settings.css")
-public class settingsForm extends VerticalLayout {
+    VerticalLayout toplayer = new VerticalLayout();
+    HorizontalLayout names = new HorizontalLayout();
 
-    private final VerticalLayout topLayer = new VerticalLayout();
-    private final HorizontalLayout names = new HorizontalLayout();
-    private final HorizontalLayout second = new HorizontalLayout();
-    private final Div form = new Div();
 
-    private final TextField firstname = new TextField("First name");
-    private final TextField secondname = new TextField("Second name");
-    private final EmailField email = new EmailField("Email");
+    HorizontalLayout second = new HorizontalLayout();
+    Div form = new Div();
 
-    private final DatePicker date = new DatePicker("Date of birth");
-    private final RadioButtonGroup<String> gender = new RadioButtonGroup<>();
-    private final NumberField phone = new NumberField("Phone");
-    private final Image image = new Image();
-    private final MemoryBuffer buffer = new MemoryBuffer();
-    private final Upload upload = new Upload(buffer);
+    TextField firstname = new TextField("First name");
+    TextField secondname = new TextField("Second name ");
 
-    public settingsForm() {
+    EmailField email = new EmailField("Email");
+    DatePicker date = new DatePicker("Date of birth");
+    RadioButtonGroup gender = new RadioButtonGroup<>("Gender");
+    NumberField phone = new NumberField("Phone");
+    private Image image;
+    private MemoryBuffer buffer;
+
+    public Profile () {
         addClassName("form");
-        email.addClassName("email");
-        phone.addClassName("phone");
 
         H2 headText = new H2("Personal Info");
         headText.addClassName("head-txt");
@@ -50,57 +51,33 @@ public class settingsForm extends VerticalLayout {
         Div line = new Div();
         line.addClassName("line");
 
-        topLayer.add(headText, subText, line);
+        toplayer.add(headText,subText,line);
 
-        uploadSet i18n = new uploadSet();
-        i18n.getAddFiles().setOne("Select image..");
-        i18n.getDropFiles().setOne("Drop image here");
-        i18n.getError().setIncorrectFileType(
-                "The provided file does not have the correct format (PNG && JPG).");
-        upload.setI18n(i18n);
-
-
-        upload.setDropLabelIcon(VaadinIcon.PICTURE.create());
-
-        upload.setAcceptedFileTypes("image/jpeg", "image/png");
-        upload.addSucceededListener(event -> {
-//            image.setSrc(buffer.getInputStream());
-            image.setVisible(true);
-        });
-        upload.addClassName("upload");
-
+        Upload pic = new Upload(buffer);
+        pic.addClassName("upload");
+        pic.setAcceptedFileTypes("image/jpeg", "image/png");
 
 
         gender.setLabel("Gender");
         gender.setItems("Male", "Female");
 
-        Button btn = new Button("Update");
-        btn.addClassName("btn");
-//        btn.addClickListener(event -> {
-//            SettingsFormDTO settingsFormDTO = new SettingsFormDTO(
-//                    firstname.getValue(),
-//                    secondname.getValue(),
-//                    email.getValue(),
-//                    date.getValue(),
-//                    gender.getValue(),
-//                    phone.getValue()
-//            );
 
-        names.add(firstname, secondname, email);
+        Button btn  = new Button("Update");
+        btn.addClassName("btn");
+
+
+        names.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.END);
+        second.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.END);
+
+
+        names.add(firstname,secondname, email);
         names.addClassName("firstDiv");
-        second.add(date, gender, phone);
+        second.add(date,gender,phone);
         second.addClassName("secondDiv");
 
-//        image.setVisible(false);
-        form.add(upload,image ,names, second, btn);
 
-//        image.setVisible(false);
-//        form.add(image);
+        form.add(pic,names,second,btn);
 
-        add(topLayer, form);
+        add(toplayer,form);
     }
-
-
-
-
 }
