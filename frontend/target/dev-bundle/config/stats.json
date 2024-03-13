@@ -280,7 +280,7 @@
   "themes/frontend/Register.css": "27b257a8c5fcfbb5a310b26e4fda59c44d992c4922fa047678a005d8344ca1d4",
   "themes/frontend/settings.css": "552774935c6d0f137665dcf665c09c535c42d5d892e94ac1e118d17fe029ac34",
   "themes/frontend/Dashboard.css": "edf81fd1ae03acc20b05524d5de3eab3c2113ab6c962bca4194d648744705f25",
-  "themes/frontend/History.css": "3ffae0af85aaa98a6f3873eb561694422526e46fae332c71d2cd958d3f7269f1",
+  "themes/frontend/History.css": "69fd6a79b8bf59d535e45aef1197a35031d9673629b69674ca599ff37b17adb5",
   "buttonFunctions.js": "c852123f9b2c44eb75e555119d3e05a7dbe78b91d0ab616feb9df1654474707d",
   "comboBoxConnector.js": "1d004c3dae9c76f8bcc68678abe1b8f7bdc8b456f5c9c4c7f190df8ed25d66cd",
   "contextMenuConnector.js": "b3e8b1b38de09aa65321338d3c149e18b4c5b53959ba134afe3be2d14942d86d",
@@ -307,7 +307,7 @@
   "frontend": "{\n  \"lumoImports\" : [ \"typography\", \"color\", \"spacing\", \"badge\", \"utility\" ]\n}"
  },
  "entryScripts": [
-  "VAADIN/build/indexhtml-GE3HoQKM.js"
+  "VAADIN/build/indexhtml-4HuR3ArC.js"
  ],
  "webComponents": [],
  "cvdlModules": {
@@ -342,6 +342,6 @@
  },
  "packageJsonHash": "aa07176bb324d6a387237e3369d9e5dc6ff75048fd481c0f481acac472ac9abb",
  "indexHtmlGenerated": [
-  "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-GE3HoQKM.js\"></script>"
+  "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-4HuR3ArC.js\"></script>"
  ]
 }
