@@ -2,6 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     /*padding: 0 2rem;*/
+    position: relative;
 }
 
 .header {
@@ -41,4 +42,12 @@ vaadin-grid::part(even-row-cell) {
 
 .open-button {
     --vaadin-button-tertiary-text-color: #F5CD58;
+}
+
+.reload-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
 }
