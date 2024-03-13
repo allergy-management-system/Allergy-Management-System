@@ -6,31 +6,25 @@ import com.example.application.views.component.allergyForm.Form2;
 import com.example.application.views.component.allergyForm.Form3;
 import com.example.application.views.component.modal.Modal;
 import com.example.application.views.component.notifications.Notifications;
-import com.nimbusds.jose.shaded.gson.Gson;
-import com.vaadin.flow.component.HtmlComponent;
-import com.vaadin.flow.component.Text;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.page.WebStorage;
 import com.vaadin.flow.dom.Style;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
 
 @CssImport("./themes/frontend/AllergyForm.css")
 public class FormStepperView extends VerticalLayout {
+    private static final String NAME_KEY = "userId";
+    private String userId;
 
     private final UsersServices usersServices;
     Notifications alert = new Notifications();
-
-    private RestTemplate restTemplate;
 
     private Modal openModal;
     private FormFields formFields;
@@ -120,6 +114,12 @@ public class FormStepperView extends VerticalLayout {
     }
 
     private void submitForm() {
+        WebStorage.getItem(
+                NAME_KEY,
+                value -> {
+                    userId = value == null ? "" : value;
+                }
+        );
 
         ConfirmDialog dialog = new ConfirmDialog();
         dialog.setHeader("Submit allergy form?");
@@ -141,11 +141,10 @@ public class FormStepperView extends VerticalLayout {
 
     public void SendDataToBackend () {
 
-        restTemplate = new RestTemplate();
-
         // Prepare request body data
         MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
 
+        requestBody.add("userId", userId);
         requestBody.add("peanuts", formFields.getPeanuts());
         requestBody.add("fish", formFields.getFish());
         requestBody.add("eggs", formFields.getEggs());
@@ -166,22 +165,22 @@ public class FormStepperView extends VerticalLayout {
         requestBody.add("additionalNotes", formFields.getAdditionalNotes());
 
 
-        var response = usersServices.sendMessageParams(requestBody);
+        String response = usersServices.sendMessageParams(requestBody);
 
-        System.out.println("Response: " + response);
+        if(response.contains("404")) {
+            alert.error("Failed to send request.", "Please try again after sometime.");
 
-//        switch (response.toString()) {7
-//            case "null":
-//
-//        }
+        } else if (response.contains("Optional.empty")) {
+            alert.error("Failed to send request.", "Please check your internet connection or your network and try again.");
 
-        if(response != null){
+        } else if (response.contains("Bad Gateway")) {
+            alert.error("Failed to send request.", "Bad gateway...");
+
+        } else {
             alert.success("Form Submitted Successfully!", "Please go to your history...");
 
             openModal = new Modal(response);
             openModal.open();
-        } else {
-            alert.error("Failed to send request.", "Please check your internet connection or your network and try again.");
         }
 
     }
