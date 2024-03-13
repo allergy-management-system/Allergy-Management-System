@@ -2,44 +2,52 @@ package com.example.application.services.authentication;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vaadin.flow.component.notification.Notification;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import com.vaadin.flow.component.page.WebStorage;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Optional;
+
 
 public class AuthServices {
     private static String authToken = null;
-    public static String userId = null;
     private final HttpClient httpClient;
+    private final RestTemplate restTemplate;
     private final String baseUrl;
 
+    private static final String NAME_KEY = "userId";
 
     public AuthServices() {
         this.httpClient = HttpClient.newHttpClient();
         this.baseUrl = "https://allergy-u6fk.onrender.com/api/v1";
+        restTemplate = new RestTemplate();
     }
 
-    public Object loginUser(String inputData) {
-
+    public Object loginUser (MultiValueMap<String, String> requestBody) {
         try {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(baseUrl + "/loginUser"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(inputData))
-                    .build();
+            String response;
+            response = restTemplate.postForObject(baseUrl + "/loginUser", requestBody, String.class);
 
-            HttpResponse<String> response  = sendRequest(request);
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNode = objectMapper.readTree((String) response);
 
-            return response.statusCode();
+            if (jsonNode != null && !jsonNode.isEmpty()) {
+                authToken = jsonNode.get("userId").asText();
+                WebStorage.setItem(NAME_KEY,jsonNode.get("userId").asText());
+            }
+
+            if (response.contains("status")) {
+                return "500";
+            } else {
+                return "200";
+            }
 
         } catch (Exception e) {
-            e.getMessage();
-            return Optional.empty();
+            return e.getMessage();
         }
     }
 
@@ -57,18 +65,10 @@ public class AuthServices {
 
             HttpResponse<String> response  = sendRequest(request);
 
-            // Parse JSON string
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode jsonNode = objectMapper.readTree((String) response.body());
-
-            if (jsonNode != null && !jsonNode.isEmpty()) {
-                userId = jsonNode.get("userId").asText(); // Store token upon successful login
-            }
-
             return response.statusCode();
 
         } catch (Exception e) {
-            return Optional.empty();
+            return e.getMessage();
         }
     }
 
