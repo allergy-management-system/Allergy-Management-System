@@ -5,7 +5,6 @@ import com.example.application.services.authentication.AuthServices;
 import com.example.application.services.dashboard.UsersServices;
 import com.example.application.views.component.loginForm.LoginForm;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
@@ -13,7 +12,6 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
 
-import java.util.Collection;
 
 @Route("login")
 @CssImport("./themes/frontend/Login.css")
