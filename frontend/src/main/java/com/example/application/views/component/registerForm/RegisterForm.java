@@ -4,23 +4,17 @@ import com.example.application.services.User;
 import com.example.application.services.authentication.AuthServices;
 import com.example.application.views.component.notifications.Notifications;
 import com.example.application.views.pages.authentication.LoginPage;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 @CssImport("./themes/frontend/Register.css")
 public class RegisterForm extends VerticalLayout {
