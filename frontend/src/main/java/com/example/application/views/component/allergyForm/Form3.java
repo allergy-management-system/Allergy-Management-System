@@ -1,7 +1,6 @@
 package com.example.application.views.component.allergyForm;
 
 import com.example.application.views.component.formStepper.FormFields;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.checkbox.CheckboxGroupVariant;
 import com.vaadin.flow.component.dependency.CssImport;
