@@ -1,8 +1,6 @@
 package com.example.application.views.component.allergyForm;
 
 import com.example.application.views.component.formStepper.FormFields;
-import com.example.application.views.component.formStepper.FormStepperView;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
