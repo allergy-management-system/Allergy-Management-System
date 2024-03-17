@@ -88,6 +88,7 @@ public class AuthServices {
 
     public void logout() {
         // Clear authentication token on logout
+        WebStorage.removeItem(NAME_KEY);
         authToken = null;
     }
 }
