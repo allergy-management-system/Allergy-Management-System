@@ -3,11 +3,10 @@ package com.example.application.views.pages.history;
 import com.example.application.services.dashboard.UsersServices;
 import com.example.application.views.MainLayout;
 import com.example.application.views.component.modal.Modal;
+import com.example.application.views.component.notifications.Notifications;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.page.WebStorage;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
@@ -15,7 +14,6 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.provider.Query;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
@@ -39,15 +37,19 @@ public class History extends VerticalLayout implements BeforeEnterObserver {
             fetchData();
         });
     }
+
+    Notifications alert = new Notifications();
     private static final String NAME_KEY = "userId";
     private String userId;
     UsersServices usersServices = new UsersServices();
 
     private String date;
     private String message;
+    private String allergyId;
     Grid<Object[]> grid;
 
     List<String> messages = new ArrayList<String>();
+    List<String> alergyIds = new ArrayList<String>();
 
     public History () {
 
@@ -98,6 +100,16 @@ public class History extends VerticalLayout implements BeforeEnterObserver {
         Button deleteButton = new Button("Delete");
         deleteButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY, ButtonVariant.LUMO_ERROR);
 
+        deleteButton.addClickListener(event -> {
+            Object response = usersServices.deleteAllergy(allergyId);
+
+            if (response != null) {
+                alert.error("Error deleting!", "There was an error deleting the allergy.");
+            } else {
+                alert.success("Successfully Deleted", "Your allergy was deleted successfully.");
+            }
+        });
+
         // Add click listener for the button if needed
         HorizontalLayout buttonGroup = new HorizontalLayout(openButton, deleteButton);
         return buttonGroup;
@@ -114,10 +126,13 @@ public class History extends VerticalLayout implements BeforeEnterObserver {
                 // Iterate through each object in the array
                 for (JsonNode node : response) {
                     // Access and print the values of properties in each object
+                    allergyId = node.get("allergyId").asText();
                     date = node.get("date").asText();
                     message = node.get("response").asText();
 
                     messages.add(message);
+                    alergyIds.add(allergyId);
+
                     // Add data to the list
                     Object[] rowData = {date, message, "Open", "Delete"};
                     historyDataList.add(rowData);
