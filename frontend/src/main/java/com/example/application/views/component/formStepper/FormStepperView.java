@@ -22,10 +22,8 @@ import org.springframework.util.MultiValueMap;
 public class FormStepperView extends VerticalLayout {
     private static final String NAME_KEY = "userId";
     private String userId;
-
     private final UsersServices usersServices;
-    Notifications alert = new Notifications();
-
+    private Notifications alert;
     private Modal openModal;
     private FormFields formFields;
     private Button prevButton;
