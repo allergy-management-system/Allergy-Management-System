@@ -20,7 +20,7 @@ public class UsersServices {
     private Object[][] historyData;
     public UsersServices() {
         this.httpClient = HttpClient.newHttpClient();
-        this.baseUrl = "https://6663-196-61-44-226.ngrok-free.app";
+        this.baseUrl = "https://allergy-u6fk.onrender.com/api/v1";
 
         restTemplate = new RestTemplate();
     }
@@ -28,7 +28,7 @@ public class UsersServices {
     public String sendMessageParams(MultiValueMap<String, String> requestBody) {
         try {
             String response;
-            response = restTemplate.postForObject("https://6663-196-61-44-226.ngrok-free.app/api/v1/allergy/chat", requestBody, String.class);
+            response = restTemplate.postForObject("https://5e91-158-220-87-199.ngrok-free.app/api/v1/allergy/chat", requestBody, String.class);
 
             // Parse JSON string
             ObjectMapper objectMapper = new ObjectMapper();
@@ -58,7 +58,7 @@ public class UsersServices {
             requestBody.add("userId", userId);
 
             // Set up the URL
-            String url = "https://allergy-u6fk.onrender.com/api/v1/allergy/history";
+            String url = baseUrl + "/allergy/history";
 
             // Make the POST request with the request body
             ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, requestBody, String.class);
@@ -72,7 +72,6 @@ public class UsersServices {
             if (responseNode.isArray()) {
                 // Iterate over each element in the array
                 for (JsonNode arrayElement : responseNode) {
-                    System.out.println("Array Element: " + arrayElement);
                     responseNodes.add(arrayElement);
                 }
             } else {
@@ -86,14 +85,14 @@ public class UsersServices {
         }
     }
 
-    public Object DeleteAllergy (String userId) {
+    public Object deleteAllergy (String userId) {
         try {
             // Construct the request body with the userId
             MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
             requestBody.add("userId", userId);
 
             // Set up the URL
-            String url = "https://allergy-u6fk.onrender.com/api/v1/allergy/history";
+            String url = baseUrl + "/allergy/delete";
 
             // Make the POST request with the request body
             ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, requestBody, String.class);
