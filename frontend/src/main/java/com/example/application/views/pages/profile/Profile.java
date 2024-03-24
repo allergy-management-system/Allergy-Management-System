@@ -1,6 +1,8 @@
 package com.example.application.views.pages.profile;
 
+import com.example.application.services.authentication.AuthServices;
 import com.example.application.views.MainLayout;
+import com.example.application.views.pages.authentication.LoginPage;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -16,12 +18,22 @@ import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @PageTitle("Profile")
 @Route(value = "profile", layout = MainLayout.class)
-public class Profile extends Div {
+public class Profile extends Div implements BeforeEnterObserver {
+
+    @Override
+    public void beforeEnter(BeforeEnterEvent event) {
+        // Check if the user is authenticated
+        if (!AuthServices.isUserLoggedIn()) {
+            event.rerouteTo(LoginPage.class); // Redirect to login page if not logged in
+        }
+    }
 
     VerticalLayout toplayer = new VerticalLayout();
     HorizontalLayout names = new HorizontalLayout();
